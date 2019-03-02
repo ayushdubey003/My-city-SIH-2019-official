@@ -8,8 +8,12 @@ import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +32,13 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
 
     private GoogleMap mMap;
     private AlertDialog.Builder builder;
+    private EditText nameEdit;
+    private EditText contactEdit;
+    private TextView addButton;
+    private TextView cancelButton;
     String address="";
+    SharedPreferences emerPrefs;
+    private String cityName;
 
     private static String mUrl="http://maps.google.com/maps?q=";
     @Override
@@ -37,8 +47,8 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         setContentView(R.layout.activity_introduction);
 
         builder=new AlertDialog.Builder(this);
+        emerPrefs=getSharedPreferences("EmerPrefs",MODE_PRIVATE);
 
-        //TODO: Correct Map Activity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -56,8 +66,9 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
                 +stateCityprefs.getString(sharedPreferences.getString("address","No such Location"),
                 "No Such Location");
         city_location.setText(address);
+        cityName = sharedPreferences.getString("address","No such Location");
 
-        //TODO: Add Intents on clicks
+
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,7 +187,6 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         emer.add("Police");
         emer.add("Fire");
         emer.add("Ambulance");
-        emer.add("Ambulance");
         emer.add("Gas Leakage");
         emer.add("Tourist-Helpline");
         emer.add("Child-Helpline");
@@ -186,16 +196,43 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
 
 
         final ArrayList<String> num=new ArrayList<>();
-        num.add("112");
-        num.add("100");
-        num.add("102");
-        num.add("108");
-        num.add("1906");
-        num.add("1363");
-        num.add("1098");
-        num.add("104");
-        num.add("181");
-        num.add("09343180000");
+        if(cityName.equals("Noida")){
+            num.add("112");
+            num.add("01202473395");
+            num.add("01204356491");
+            num.add("09540929495");
+            num.add("01206440555");
+            num.add("1363");
+            num.add("09140857492");
+            num.add("07042840641");
+            num.add("01126944805");
+            num.add("09343180000");
+        }
+        else{
+            num.add("112");
+            num.add("100");
+            num.add("102");
+            num.add("108");
+            num.add("1906");
+            num.add("1363");
+            num.add("1098");
+            num.add("104");
+            num.add("181");
+            num.add("09343180000");
+        }
+
+
+        final int intCount = emerPrefs.getInt(address+"count",0);
+
+        for (int i=0;i<intCount;i++){
+            String temp = emerPrefs.getString(address+Integer.toString(i),"s:v");
+            String[] tempArray = temp.split(":");
+            String name = tempArray[0];
+            String contact = tempArray[1];
+            Log.e("error",contact);
+            emer.add(name);
+            num.add(contact);
+        }
 
         builder.setTitle("Emergency Numbers");
         builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -204,36 +241,19 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
                 dialog.dismiss();
             }
         });
+
+        builder.setPositiveButton("Add Emergency Number", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                addEmergency();
+            }
+        });
         final Intent intent =new Intent(Intent.ACTION_DIAL);
         ArrayAdapter<String> adapter=new ArrayAdapter<>(IntroductionActivity.this,android.R.layout.simple_list_item_1,emer);
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch(which)
-                {
-
-                    case 0: intent.setData(Uri.parse("tel:"+num.get(0)));
-                        break;
-                    case 1: intent.setData(Uri.parse("tel:"+num.get(1)));
-                        break;
-                    case 2: intent.setData(Uri.parse("tel:"+num.get(2)));
-                        break;
-                    case 3: intent.setData(Uri.parse("tel:"+num.get(3)));
-                        break;
-                    case 4: intent.setData(Uri.parse("tel:"+num.get(4)));
-                        break;
-                    case 5: intent.setData(Uri.parse("tel:"+num.get(5)));
-                        break;
-                    case 6: intent.setData(Uri.parse("tel:"+num.get(6)));
-                        break;
-                    case 7: intent.setData(Uri.parse("tel:"+num.get(7)));
-                        break;
-                    case 8: intent.setData(Uri.parse("tel:"+num.get(8)));
-                        break;
-                    case 9: intent.setData(Uri.parse("tel:"+num.get(9)));
-                        break;
-                }
-
+                intent.setData(Uri.parse("tel:"+num.get(which)));
                 startActivity(intent);
 
             }
@@ -241,5 +261,43 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
 
         AlertDialog dialog=builder.create();
         dialog.show();
+    }
+
+    public void addEmergency()
+    {
+        AlertDialog.Builder builder=new AlertDialog.Builder(IntroductionActivity.this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View v = inflater.inflate(R.layout.emergency_dialog, null);
+        builder.setView(v);
+        final Dialog dialog=builder.create();
+        dialog.setContentView(R.layout.emergency_dialog);
+        dialog.show();
+
+        nameEdit = (EditText) dialog.findViewById(R.id.name);
+        contactEdit = (EditText) dialog.findViewById(R.id.contact);
+        addButton = (TextView) dialog.findViewById(R.id.add);
+        cancelButton = (TextView) dialog.findViewById(R.id.cancel);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = nameEdit.getText().toString();
+                String contact =contactEdit.getText().toString();
+                SharedPreferences.Editor edit=emerPrefs.edit();
+                edit.putInt(address+"count",emerPrefs.getInt(address+"count",0)+1);
+                edit.putString(address+Integer.toString(emerPrefs.getInt(address+"count",0)),name+":"+contact);
+                edit.apply();
+                dialog.cancel();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+
+
     }
 }
