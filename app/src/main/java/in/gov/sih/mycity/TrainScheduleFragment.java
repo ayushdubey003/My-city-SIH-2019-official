@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -85,6 +86,7 @@ public class TrainScheduleFragment extends Fragment {
         destiny.setThreshold(1);
         destiny.setAdapter(mArrayAdapter);
         TextView textView = (TextView) view.findViewById(R.id.show);
+        mList = view.findViewById(R.id.train_list);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +105,6 @@ public class TrainScheduleFragment extends Fragment {
                 }
             }
         });
-        mList = view.findViewById(R.id.train_list);
         trainAdapter = new TrainAdapter(getContext(), 0, new ArrayList<TrainModel>());
         mList.setAdapter(trainAdapter);
         return view;
@@ -127,6 +128,8 @@ public class TrainScheduleFragment extends Fragment {
 
         @Override
         protected Object doInBackground(Object[] objects) {
+            if(trainAdapter!=null)
+                trainAdapter.clear();
             ArrayList<TrainModel> trainModels = new ArrayList<>();
             InputStream inputStream = getResources().openRawResource(R.raw.schedule);
             parseTrainSchedule parseTrainSchedule = new parseTrainSchedule(inputStream, getContext(), mSource, destination);

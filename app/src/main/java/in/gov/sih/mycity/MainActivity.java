@@ -97,7 +97,7 @@ public class MainActivity extends EasyLocationAppCompatActivity {
                         Toast.makeText(MainActivity.this, "Entered Location does not exist in database", Toast.LENGTH_LONG).show();
                     else {
                         longi = Double.parseDouble(coordinates.substring(0, 5));
-                        lati = Double.parseDouble(coordinates.substring(8, 13));
+                        lati = Double.parseDouble(coordinates.substring(6));
                         List<Address> addresss = null;
                         Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                         try {

@@ -36,14 +36,12 @@ public class ParseCity {
             String csvLine;
             while ((csvLine = reader.readLine()) != null) {
                 String[] row = csvLine.split(",");
-                row[0] = row[0].substring(1, row[0].length() - 1);
-                row[1] = row[1].substring(1, row[1].length() - 1);
-                row[2] = row[2].substring(1, row[2].length() - 1);
-                row[3] = row[3].substring(1, row[3].length() - 1);
-                row[4] = row[4].substring(1, row[4].length() - 1);
+
                 if (row[2].equals(":") || row[3].equals(":")) {
                     continue;
                 }
+                row[2] = row[2].substring(0, row[2].length() - 2);
+                row[3] = row[3].substring(0, row[3].length() - 2);
                 resultList.add(row[1]);
                 String s = row[3].trim() + ":" + row[2].trim();
                 edit.putString(row[1], s);
