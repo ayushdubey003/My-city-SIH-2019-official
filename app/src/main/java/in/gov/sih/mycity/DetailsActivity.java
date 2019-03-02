@@ -131,7 +131,7 @@ public class DetailsActivity extends AppCompatActivity {
                                 case 0:
                                         return new Information().newInstance();
                                 case 1:
-                                        return new MainAttractions().newInstance();
+                                        return new Attractions_frag();
                                 case 2:
                                         return new TrainScheduleFragment().newInstance();
                                 default:
