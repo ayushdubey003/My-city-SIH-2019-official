@@ -1,0 +1,82 @@
+<LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6.5"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_gravity="center_vertical">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="The Royal Palace"
+                        android:id="@+id/hotel_title"
+                        android:textSize="18sp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rs. 80"
+                        android:textSize="14sp"
+                        android:id="@+id/hotel_price"
+                        android:layout_marginTop="6dp"/>
+
+                <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?attr/ratingBarStyleSmall"
+                        android:layout_marginTop="8dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        android:text="127 reviews"
+                        android:id="@+id/count_rating"
+                        android:layout_marginTop="4dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="230, Navsheel Dham, Kalyanpur, Kanpur"
+                        android:id="@+id/address"
+                        android:layout_marginTop="16dp"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.5"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_gravity="center_vertical">
+
+                <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="4dp"
+                        android:background="#000000"
+                        android:layout_centerInParent="true">
+
+                        <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/bangalore"
+                                android:scaleType="centerCrop"
+                                android:alpha="0.68"
+                                android:layout_gravity="center_horizontal"/>
+
+                </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+</LinearLayout>
