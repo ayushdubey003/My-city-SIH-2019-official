@@ -1,18 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:padding="8dp"
+            android:id="@+id/auto"
+            android:hint="Enter city name"
+            android:textColorHint="@android:color/darker_gray"/>
+        <ImageView
+            android:id="@+id/location"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_my_location_black_24dp" />
 
-    <TextView
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:visibility="gone"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@android:color/background_light"
+        android:padding="12dp"
+        android:textStyle="bold"
+        android:text="Go"
+        android:textSize="18sp" />
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Most Popular"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            />
+        <View
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:background="#A9A9A9"
+            android:layout_marginRight="5dp"
+            android:layout_height="1dp"
+            />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/common_cities"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>
