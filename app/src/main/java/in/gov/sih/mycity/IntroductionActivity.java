@@ -63,6 +63,7 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         TextView emergency=(TextView)findViewById(R.id.emergency_contact);
         TextView info=(TextView)findViewById(R.id.information);
         TextView redirectMap=(TextView)findViewById(R.id.location);
+        TextView weather_act=(TextView) findViewById(R.id.weather);
 
         address=sharedPreferences.getString("address","No such Location")+" , "
                 +stateCityprefs.getString(sharedPreferences.getString("address","No such Location"),
@@ -70,6 +71,12 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         city_location.setText(address);
         cityName = sharedPreferences.getString("address","No such Location");
 
+        weather_act.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(IntroductionActivity.this,weather_activity.class));
+            }
+        });
 
         info.setOnClickListener(new View.OnClickListener() {
             @Override
