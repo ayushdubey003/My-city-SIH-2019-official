@@ -36,7 +36,7 @@ public class TrainScheduleFragment extends Fragment {
     private String destination;
     ListView mList;
     TrainAdapter trainAdapter;
-
+    TextView emptyView;
     public TrainScheduleFragment() {
         // Required empty public constructor
     }
@@ -51,6 +51,8 @@ public class TrainScheduleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_train_schedule, container, false);
+        emptyView=view.findViewById(android.R.id.empty);
+        emptyView.setVisibility(View.GONE);
         mProgressBar = view.findViewById(R.id.progressBarTrain);
         mProgressBar.setVisibility(View.INVISIBLE);
         InputStream inputStream = getResources().openRawResource(R.raw.stations);
@@ -80,7 +82,7 @@ public class TrainScheduleFragment extends Fragment {
         ParseStation parseStationAgain = new ParseStation(inputStream1, getContext());
         final AutoCompleteTextView destiny = (AutoCompleteTextView) view.findViewById(R.id.destination);
         possibleDestinations = parseStation.getStations();
-        ArrayAdapter<String> mArrayAdapter = new ArrayAdapter<String>(getContext(),
+        final ArrayAdapter<String> mArrayAdapter = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_list_item_1,
                 possibleDestinations);
         destiny.setThreshold(1);
@@ -91,6 +93,8 @@ public class TrainScheduleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 destination = destiny.getText().toString();
+                emptyView.setVisibility(View.GONE);
+                trainAdapter.clear();
                 if (destination.length() == 0 || destination == null)
                     Toast.makeText(getContext(), "Destination cannot be empty", Toast.LENGTH_LONG).show();
                 else if (mSource.equals(destination))
@@ -122,14 +126,15 @@ public class TrainScheduleFragment extends Fragment {
             mProgressBar.setVisibility(View.GONE);
 
             trains = (ArrayList<TrainModel>) o;
+            if(trains.size()==0){
+                emptyView.setVisibility(View.VISIBLE);
+            }
             trainAdapter.clear();
             trainAdapter.addAll(trains);
         }
 
         @Override
         protected Object doInBackground(Object[] objects) {
-            if(trainAdapter!=null)
-                trainAdapter.clear();
             ArrayList<TrainModel> trainModels = new ArrayList<>();
             InputStream inputStream = getResources().openRawResource(R.raw.schedule);
             parseTrainSchedule parseTrainSchedule = new parseTrainSchedule(inputStream, getContext(), mSource, destination);
