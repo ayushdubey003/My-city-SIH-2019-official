@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -53,6 +55,8 @@ public class Attraction_Adapter extends RecyclerView.Adapter<Attraction_Adapter.
 
         holder.img.setImageResource(R.drawable.backg);
         holder.name.setText(attractionModels.get(position).getName());
+        final String hotelName = attractionModels.get(position).getName();
+        final String uid=FirebaseAuth.getInstance().getUid().substring(0,10);
         holder.address.setText(attractionModels.get(position).getAddress());
         int revv=(int)attractionModels.get(position).getNum();
         holder.rev.setText(revv+" reviews");
@@ -64,25 +68,29 @@ public class Attraction_Adapter extends RecyclerView.Adapter<Attraction_Adapter.
                 AlertDialog.Builder builder=new AlertDialog.Builder(context);
                 final RatingBar ratingBar=new RatingBar(context);
                 ratingBar.setPadding(100, 100, 100, 0);
+                final DatabaseReference dref=FirebaseDatabase.getInstance().getReference("mainattraction");
+                final SharedPreferences sharedPreferences=context.getSharedPreferences("Ratings",Context.MODE_PRIVATE);
+                final SharedPreferences.Editor editor=sharedPreferences.edit();
+                final float rating = sharedPreferences.getFloat(uid+hotelName,0.0f);
                 builder.setView(ratingBar);
+                if(rating!=0.0f)
+                    ratingBar.setRating(rating);
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        DatabaseReference dref=FirebaseDatabase.getInstance().getReference("mainattraction");
-                        SharedPreferences sharedPreferences=context.getSharedPreferences("Ratings",Context.MODE_PRIVATE);
-                       SharedPreferences.Editor editor=sharedPreferences.edit();
-                       float rating = sharedPreferences.getFloat("rrt",0.0f);
+
+
                        if(rating==0.0f) {
-                           dref.child(String.valueOf(position)).child("avgrat").setValue(((attractionModels.get(position).getAvgrat() * attractionModels.get(position).getNum() - rating + ratingBar.getRating()) / (attractionModels.get(position).getNum() + 1)));
-                           dref.child(String.valueOf(position)).child("num").setValue(attractionModels.get(position).getNum() + 1);
+                           dref.child(String.valueOf(position)).child("avgrat").setValue(((attractionModels.get(position).getAvgrat() * attractionModels.get(position).getNum() - rating + ratingBar.getRating()) / (attractionModels.get(position).getNum()+1)));
+                           dref.child(String.valueOf(position)).child("num").setValue(attractionModels.get(position).getNum()+1);
                        }
 
                         if(rating!=0.0f) {
                             dref.child(String.valueOf(position)).child("avgrat").setValue(((attractionModels.get(position).getAvgrat() * attractionModels.get(position).getNum() - rating + ratingBar.getRating()) / (attractionModels.get(position).getNum())));
                         }
-                        editor.putFloat("rrt",ratingBar.getRating());
-                       editor.commit();
+                        editor.putFloat(uid+hotelName,ratingBar.getRating());
+                        editor.commit();
                     }
                 });
                 builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
