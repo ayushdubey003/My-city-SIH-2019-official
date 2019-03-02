@@ -38,6 +38,7 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
     private TextView cancelButton;
     String address="";
     SharedPreferences emerPrefs;
+    SharedPreferences utilPrefs;
     private String cityName;
 
     private static String mUrl="http://maps.google.com/maps?q=";
@@ -48,6 +49,7 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
 
         builder=new AlertDialog.Builder(this);
         emerPrefs=getSharedPreferences("EmerPrefs",MODE_PRIVATE);
+        utilPrefs=getSharedPreferences("UtilPrefs",MODE_PRIVATE);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -131,36 +133,23 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         utilities.add("Airport");
         utilities.add("Port");
         utilities.add("Restaurants");
+        utilities.add("CourtHouse");
+        utilities.add("Yamaha Showroom");
 
-        ArrayAdapter<String> uuttii=new ArrayAdapter<>(IntroductionActivity.this,android.R.layout.simple_list_item_1,utilities);
+        final int intCount = utilPrefs.getInt(address+"count",0);
+
+        for (int i=0;i<intCount;i++){
+            String utility = utilPrefs.getString(address+Integer.toString(i),"");
+            utilities.add(utility);
+        }
+
+        final ArrayAdapter<String> uuttii=new ArrayAdapter<>(IntroductionActivity.this,android.R.layout.simple_list_item_1,utilities);
         builder.setAdapter(uuttii, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch(which)
-                {
-                    case 0:  intent.setData(Uri.parse(mUrl+"Post+Office+in "+address));
-                        break;
-                    case 1:  intent.setData(Uri.parse(mUrl+"Police+Stations+in "+address));
-                        break;
-                    case 2:  intent.setData(Uri.parse(mUrl+"Petrol+Pumps+in "+address));
-                        break;
-                    case 3:  intent.setData(Uri.parse(mUrl+"ATMs+in "+address));
-                        break;
-                    case 4:  intent.setData(Uri.parse(mUrl+"General+Stores+in "+address));
-                        break;
-                    case 5:  intent.setData(Uri.parse(mUrl+"Bus+Stands+in "+address));
-                        break;
-                    case 6:  intent.setData(Uri.parse(mUrl+"Airports+in "+address));
-                        break;
-                    case 7:  intent.setData(Uri.parse(mUrl+"Ports+in "+address));
-                        break;
-                    case 8:  intent.setData(Uri.parse(mUrl+"Restaurants+in "+address));
-                        break;
-
-
-
-                }
-
+                String utility = uuttii.getItem(which);
+                utility = utility.replaceAll(" ","+");
+                intent.setData(Uri.parse(mUrl+utility+"+in+"+address));
                 startActivity(intent);
             }
         });
@@ -169,6 +158,13 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
+            }
+        });
+
+        builder.setPositiveButton("Add Utilities", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                addUtilities();
             }
         });
 
@@ -299,5 +295,38 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         });
 
 
+    }
+
+    private void addUtilities() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(IntroductionActivity.this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View v = inflater.inflate(R.layout.utility_dialog, null);
+        builder.setView(v);
+        final Dialog dialog=builder.create();
+        dialog.setContentView(R.layout.utility_dialog);
+        dialog.show();
+
+        nameEdit = (EditText) dialog.findViewById(R.id.utility_name);
+        addButton = (TextView) dialog.findViewById(R.id.add);
+        cancelButton = (TextView) dialog.findViewById(R.id.cancel);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = nameEdit.getText().toString();
+                SharedPreferences.Editor edit=utilPrefs.edit();
+                edit.putInt(address+"count",utilPrefs.getInt(address+"count",0)+1);
+                edit.putString(address+Integer.toString(utilPrefs.getInt(address+"count",0)),name);
+                edit.apply();
+                dialog.cancel();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
     }
 }
