@@ -215,7 +215,8 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("kj", "logout");
+                AuthUI.getInstance().signOut(MainActivity.this);
+                Toast.makeText(MainActivity.this, "Signed out!", Toast.LENGTH_SHORT).show();
             }
         });
 
