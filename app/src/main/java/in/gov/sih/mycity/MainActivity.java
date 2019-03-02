@@ -33,6 +33,8 @@ import com.akhgupta.easylocation.EasyLocationRequest;
 import com.akhgupta.easylocation.EasyLocationRequestBuilder;
 import com.google.android.gms.location.LocationRequest;
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -72,12 +74,20 @@ public class MainActivity extends EasyLocationAppCompatActivity {
     private LinearLayout layer;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //startActivity(new Intent(this, DetailsActivity.class));finish();
         user=findViewById(R.id.user);
-        connectToFirebase();
         user.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
        // user.setVisibility(View.GONE);
         InputStream inputStream = getResources().openRawResource(R.raw.cities);
@@ -215,7 +225,17 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("kj", "logout");
+               // startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                AuthUI.getInstance()
+                        .signOut(MainActivity.this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                // user is now signed out
+                                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                                finish();
+                            }
+                        });
+                Toast.makeText(MainActivity.this, "Signed out!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -290,22 +310,6 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         Toast.makeText(this, "Enable Location for app to function properly", Toast.LENGTH_LONG).show();
     }
 
-    public void connectToFirebase(){
-
-    }
-
-    private void UpdateUI(FirebaseUser users) throws IOException {
-        /*
-        TextView userName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userName);
-        TextView email = (TextView) navigationView.getHeaderView(0).findViewById(R.id.email);
-        ImageView imageView = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageView);
-
-        mUsername = user.getDisplayName();
-        userName.setText(mUsername);
-        email.setText(user.getEmail());*/
-        user.setText("Welcome "+users.getDisplayName());
-        //TODO: Add Profile Image in Nav Bar
-    }
 
     private void promptSpeechInput() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);

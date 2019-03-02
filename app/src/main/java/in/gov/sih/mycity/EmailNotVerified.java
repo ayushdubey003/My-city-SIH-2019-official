@@ -34,7 +34,7 @@ public class EmailNotVerified extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             public void onComplete(@NonNull Task<Void> task) {
                                 // user is now signed out
-                                startActivity(new Intent(EmailNotVerified.this, MainActivity.class));
+                                startActivity(new Intent(EmailNotVerified.this, LoginActivity.class));
                                 finish();
                             }
                         });
