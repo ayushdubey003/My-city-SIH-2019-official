@@ -74,7 +74,8 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(IntroductionActivity.this,DetailsActivity.class));
+                startActivity(new Intent(IntroductionActivity.this,Information.class));
+                //startActivity(new Intent(IntroductionActivity.this,SplashScreen.class));
             }
         });
 
