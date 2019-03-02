@@ -112,8 +112,8 @@ public class MainActivity extends EasyLocationAppCompatActivity {
                         else
                             editor.putString("district", "Port Blair");
                         editor.apply();
-                        //Intent intent = new Intent(MainActivity.this, IntroductionActivity.class);
-                        //startActivity(intent);
+                        Intent intent = new Intent(MainActivity.this, IntroductionActivity.class);
+                        startActivity(intent);
                     }
                 }
             }
