@@ -24,6 +24,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,11 @@ public class MainActivity extends EasyLocationAppCompatActivity {
     public static final int RC_SIGN_IN = 1;
     public static final String ANONYMOUS = "ANONYMOUS";
     private final int REQ_CODE_SPEECH_INPUT = 2;
+
+    private LinearLayout popupButton;
+    private LinearLayout root;
+    private LinearLayout popup;
+
 
     private double lati, longi;
     private TextView user;
@@ -168,6 +174,31 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         common_cities_adapter my_common_citiesadap = new common_cities_adapter(this, data, imgs);
 
         common_cities.setAdapter(my_common_citiesadap);
+
+        popupButton = (LinearLayout) findViewById(R.id.popup_button);
+        popup = (LinearLayout) findViewById(R.id.popup);
+        root = (LinearLayout) findViewById(R.id.root);
+
+        popup.setVisibility(View.GONE);
+
+        popupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(popup.getVisibility() == View.GONE){
+                    popup.setVisibility(View.VISIBLE);
+                    root.animate().alpha(0.3f);
+                }
+            }
+        });
+
+        root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popup.animate().setDuration(1000).alpha(1f);
+                popup.setVisibility(View.GONE);
+                root.animate().setDuration(1000).alpha(1f);
+            }
+        });
 
     }
 

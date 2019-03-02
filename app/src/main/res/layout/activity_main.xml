@@ -1,113 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#FFFFFF">
-
+<RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="#000000">
     <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7">
-
-        <AutoCompleteTextView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:padding="8dp"
-            android:id="@+id/auto"
-            android:hint="Enter city name"
-            android:layout_weight="1"
-            android:textColorHint="@android:color/darker_gray"/>
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity"
+            android:background="#FFFFFF"
+            android:id="@+id/root">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/colorPrimaryDark"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:text="MyCity App"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="20dp"
+                    android:id="@+id/popup_button">
+
+                <android.support.v7.widget.CardView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:cardCornerRadius="15dp">
+
+                    <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/sih"
+                            android:scaleType="centerCrop"/>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.26">
-        <ImageView
-            android:id="@+id/voice_search"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:padding="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_mic_black_32dp"
-            android:layout_gravity="center_vertical"/>
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/location"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:padding="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_my_location_black_24dp" />
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:layout_gravity="center_vertical">
+
+                <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#ffffff"
+                        android:textStyle="bold"
+                        android:textSize="25sp"
+                        android:padding="8dp"
+                        android:id="@+id/auto"
+                        android:hint="Enter city name"
+                        android:layout_weight="1"
+                        android:textColorHint="@android:color/darker_gray"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.26">
+                <ImageView
+                        android:id="@+id/voice_search"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:padding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_mic_black_32dp"
+                        android:layout_gravity="center_vertical"/>
+
+                <ImageView
+                        android:id="@+id/location"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:padding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_my_location_black_24dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+        <Button
+                android:id="@+id/button"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:visibility="visible"
+                android:layout_height="wrap_content"
+                android:background="@android:color/background_light"
+                android:padding="12dp"
+                android:textStyle="bold"
+                android:text="Go"
+                android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_marginTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:visibility="visible"
-        android:layout_height="wrap_content"
-        android:background="@android:color/background_light"
-        android:padding="12dp"
-        android:textStyle="bold"
-        android:text="Go"
-        android:textSize="18sp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="3dp"
-        android:gravity="center_horizontal"
-        android:textSize="30sp"
-        android:id="@+id/user"
-        android:textColor="#ff4500"
-        android:text="sfsdjfjfggfshf"/>
+        <LinearLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Most Popular"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:padding="10dp"
+                    />
+            <View
+                    android:layout_marginTop="25dp"
+                    android:layout_width="wrap_content"
+                    android:background="#A9A9A9"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="1dp"
+                    />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/common_cities"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="20dp"/>
+
+    </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Most Popular"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:padding="10dp"
-            />
-        <View
-            android:layout_marginTop="25dp"
-            android:layout_width="wrap_content"
-            android:background="#A9A9A9"
-            android:layout_marginRight="5dp"
-            android:layout_height="1dp"
-            />
+            android:id="@+id/popup"
+            android:layout_centerInParent="true">
+
+        <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp">
+
+            <LinearLayout
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                    <android.support.v7.widget.CardView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            app:cardCornerRadius="15dp"
+                            android:layout_marginTop="44dp">
+
+                        <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/sih"
+                                android:scaleType="centerCrop"/>
+
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:textSize="20sp"
+                            android:id="@+id/user"
+                            android:textColor="#212121"
+                            android:text="Purusharth"
+                            android:layout_marginTop="36dp"/>
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:textSize="20sp"
+                            android:id="@+id/logout"
+                            android:textColor="#212121"
+                            android:text="Log Out"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginBottom="36dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/common_cities"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
-</LinearLayout>
+</RelativeLayout>
