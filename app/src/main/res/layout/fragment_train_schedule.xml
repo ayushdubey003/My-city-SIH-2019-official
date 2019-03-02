@@ -38,7 +38,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
                     android:layout_margin="10dp"
-                    android:autofillHints="Source Here " />
+                    android:autofillHints="Source Here"
+                    android:layout_gravity="center_vertical"/>
             </LinearLayout>
 
             <AutoCompleteTextView

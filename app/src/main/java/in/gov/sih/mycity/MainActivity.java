@@ -51,6 +51,7 @@ public class MainActivity extends EasyLocationAppCompatActivity {
     private LinearLayout popupButton;
     private LinearLayout root;
     private LinearLayout popup;
+    private TextView logout;
 
 
     private double lati, longi;
@@ -68,6 +69,7 @@ public class MainActivity extends EasyLocationAppCompatActivity {
     private String mUsername;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private ImageView mSpeechButton;
+    private LinearLayout layer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,6 +177,11 @@ public class MainActivity extends EasyLocationAppCompatActivity {
 
         common_cities.setAdapter(my_common_citiesadap);
 
+        layer = (LinearLayout) findViewById(R.id.layer);
+        layer.setVisibility(View.GONE);
+
+        logout = (TextView) findViewById(R.id.logout);
+
         popupButton = (LinearLayout) findViewById(R.id.popup_button);
         popup = (LinearLayout) findViewById(R.id.popup);
         root = (LinearLayout) findViewById(R.id.root);
@@ -185,18 +192,30 @@ public class MainActivity extends EasyLocationAppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(popup.getVisibility() == View.GONE){
+                    layer.setVisibility(View.VISIBLE);
                     popup.setVisibility(View.VISIBLE);
+                    popup.bringToFront();
                     root.animate().alpha(0.3f);
                 }
             }
         });
 
-        root.setOnClickListener(new View.OnClickListener() {
+        layer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 popup.animate().setDuration(1000).alpha(1f);
                 popup.setVisibility(View.GONE);
                 root.animate().setDuration(1000).alpha(1f);
+                layer.setVisibility(View.GONE);
+            }
+        });
+
+        popup.setOnClickListener(null);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("kj", "logout");
             }
         });
 
