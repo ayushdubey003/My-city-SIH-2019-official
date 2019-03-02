@@ -37,13 +37,22 @@
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_marginLeft="150dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_height="wrap_content"
         android:background="@android:color/background_light"
         android:padding="12dp"
         android:textStyle="bold"
         android:text="Go"
         android:textSize="18sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="3dp"
+        android:gravity="center_horizontal"
+        android:textSize="30sp"
+        android:id="@+id/user"
+        android:textColor="#ff4500"
+        android:text="sfsdjfjfggfshf"/>
 
     <LinearLayout
         android:layout_marginTop="30dp"

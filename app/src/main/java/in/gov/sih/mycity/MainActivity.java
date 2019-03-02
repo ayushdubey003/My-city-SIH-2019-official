@@ -27,6 +27,7 @@ import com.akhgupta.easylocation.EasyLocationAppCompatActivity;
 import com.akhgupta.easylocation.EasyLocationRequest;
 import com.akhgupta.easylocation.EasyLocationRequestBuilder;
 import com.google.android.gms.location.LocationRequest;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +37,7 @@ import java.util.Locale;
 
 public class MainActivity extends EasyLocationAppCompatActivity {
     private double lati, longi;
+    TextView user;
     private String address, district = "";
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     static AutoCompleteTextView mAutoCompleteTextView;
@@ -50,6 +52,8 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //startActivity(new Intent(this, DetailsActivity.class));finish();
+        user=findViewById(R.id.user);
+        user.setText("Welcome "+FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         InputStream inputStream = getResources().openRawResource(R.raw.cities);
         ParseCity city = new ParseCity(inputStream);
         List<String> cities = city.getCity(MainActivity.this);

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "532769098137",
+    "firebase_url": "https://my-city-information-app.firebaseio.com",
+    "project_id": "my-city-information-app",
+    "storage_bucket": "my-city-information-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532769098137:android:7019bfe8178dd2c3",
+        "android_client_info": {
+          "package_name": "in.gov.sih.mycity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "532769098137-1u23m445rj19jb5k63c5ugsk1skgn762.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.gov.sih.mycity",
+            "certificate_hash": "afb39b9fc05e7b4a33d84eb22e26a66227f712fc"
+          }
+        },
+        {
+          "client_id": "532769098137-2j034mfa7mqjamlbm1tjs8s0c92pskgm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPMtbf0Fd-0dQpn8OV8Jvv0mUlRgK8dIE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "532769098137-2j034mfa7mqjamlbm1tjs8s0c92pskgm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
