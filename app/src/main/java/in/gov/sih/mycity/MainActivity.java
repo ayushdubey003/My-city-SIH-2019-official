@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.GridLayoutManager;
@@ -43,6 +45,7 @@ import java.util.Locale;
 public class MainActivity extends EasyLocationAppCompatActivity {
     public static final int RC_SIGN_IN = 1;
     public static final String ANONYMOUS = "ANONYMOUS";
+    private final int REQ_CODE_SPEECH_INPUT = 2;
 
     private double lati, longi;
     private TextView user;
@@ -58,6 +61,7 @@ public class MainActivity extends EasyLocationAppCompatActivity {
     private FirebaseAuth mAuth;
     private String mUsername;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+    private ImageView mSpeechButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +96,14 @@ public class MainActivity extends EasyLocationAppCompatActivity {
             @Override
             public void onClick(View v) {
                 requestSingleLocationFix(easyLocationRequest);
+            }
+        });
+
+        mSpeechButton = (ImageView) findViewById(R.id.voice_search);
+        mSpeechButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                promptSpeechInput();
             }
         });
 
@@ -242,6 +254,32 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         email.setText(user.getEmail());*/
         user.setText("Welcome "+users.getDisplayName());
         //TODO: Add Profile Image in Nav Bar
+    }
+
+    private void promptSpeechInput() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.enter_journal_message));
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode,resultCode,data);
+        switch (requestCode){
+            case REQ_CODE_SPEECH_INPUT:
+                if (resultCode == RESULT_OK && data != null) {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    mAutoCompleteTextView.setText(result.get(0));
+                }
+                break;
+        }
     }
 
 
