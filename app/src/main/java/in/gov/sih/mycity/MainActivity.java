@@ -9,10 +9,12 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -27,17 +29,23 @@ import com.akhgupta.easylocation.EasyLocationAppCompatActivity;
 import com.akhgupta.easylocation.EasyLocationRequest;
 import com.akhgupta.easylocation.EasyLocationRequestBuilder;
 import com.google.android.gms.location.LocationRequest;
+import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends EasyLocationAppCompatActivity {
+    public static final int RC_SIGN_IN = 1;
+    public static final String ANONYMOUS = "ANONYMOUS";
+
     private double lati, longi;
-    TextView user;
+    private TextView user;
     private String address, district = "",location="Noida";
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     static AutoCompleteTextView mAutoCompleteTextView;
@@ -47,14 +55,18 @@ public class MainActivity extends EasyLocationAppCompatActivity {
     Button go;
     GridLayoutManager gridLayoutManager;
 
+    private FirebaseAuth mAuth;
+    private String mUsername;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //startActivity(new Intent(this, DetailsActivity.class));finish();
         user=findViewById(R.id.user);
-//        user.setText("Welcome "+FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-        user.setVisibility(View.GONE);
+        connectToFirebase();
+       // user.setVisibility(View.GONE);
         InputStream inputStream = getResources().openRawResource(R.raw.cities);
         ParseCity city = new ParseCity(inputStream);
         List<String> cities = city.getCity(MainActivity.this);
@@ -214,6 +226,97 @@ public class MainActivity extends EasyLocationAppCompatActivity {
     public void onLocationProviderDisabled() {
         Toast.makeText(this, "Enable Location for app to function properly", Toast.LENGTH_LONG).show();
     }
+
+    public void connectToFirebase(){
+        mUsername = ANONYMOUS;
+        mAuth = FirebaseAuth.getInstance();
+
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    onSignedInInitialize(user.getDisplayName());
+
+                    boolean emailVerified = user.isEmailVerified();
+                    if(emailVerified == false){
+                        user.sendEmailVerification();
+                        Intent intent = new Intent(MainActivity.this,EmailNotVerified.class);
+                        startActivity(intent);
+                    }
+                    try {
+                        UpdateUI(user);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    onSignedOutCleanUp();
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setIsSmartLockEnabled(false)
+                                    .setAvailableProviders(Arrays.asList(
+                                            new AuthUI.IdpConfig.GoogleBuilder().build(),
+                                            new AuthUI.IdpConfig.EmailBuilder().build()))
+                                    .build(),
+                            RC_SIGN_IN);
+                }
+            }
+        };
+    }
+
+    private void UpdateUI(FirebaseUser users) throws IOException {
+        /*
+        TextView userName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userName);
+        TextView email = (TextView) navigationView.getHeaderView(0).findViewById(R.id.email);
+        ImageView imageView = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageView);
+
+        mUsername = user.getDisplayName();
+        userName.setText(mUsername);
+        email.setText(user.getEmail());*/
+        user.setText("Welcome "+users.getDisplayName());
+        //TODO: Add Profile Image in Nav Bar
+    }
+
+    private void onSignedOutCleanUp() {
+        mUsername = ANONYMOUS;
+    }
+
+    private void onSignedInInitialize(String displayName) {
+        mUsername = displayName;
+    }
+
+    /*@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }*/
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAuth.addAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            if (resultCode == RESULT_OK) {
+                // Sign-in succeeded, set up the UI
+                Toast.makeText(this, "Signed in!", Toast.LENGTH_SHORT).show();
+            } else if (resultCode == RESULT_CANCELED) {
+                // Sign in was canceled by the user, finish the activity
+                Toast.makeText(this, "Sign in canceled", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+    }
 }
 
 class common_cities_adapter extends RecyclerView.Adapter<common_cities_adapter.ViewHolder> {
@@ -275,6 +378,8 @@ class common_cities_adapter extends RecyclerView.Adapter<common_cities_adapter.V
 
     }
 
-    // convenience method for getting data at click position
+
+
+
 
 }
