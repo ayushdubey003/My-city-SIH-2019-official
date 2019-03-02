@@ -66,7 +66,8 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoginActivity.this,EmailNotVerified.class);
                         startActivity(intent);
                     }
-                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                    else
+                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 }
                 else{
                     onSignedOutCleanUp();
