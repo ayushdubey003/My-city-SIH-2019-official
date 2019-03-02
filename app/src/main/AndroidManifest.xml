@@ -40,7 +40,6 @@
             android:name=".IntroductionActivity"
             android:label="@string/title_activity_introduction" />
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".MainAttractions"></activity>
     </application>
 
 </manifest>
