@@ -132,7 +132,40 @@ public class Information extends Fragment {
                         keyView.setText(info.getKey());
                         valueView.setText(info.getValue());
 
+                        if(info.getValue().trim().equals("")){
+                                valueView.setVisibility(View.GONE);
+                                keyView.setTextSize(22);
+                                keyView.setPadding(0, 60, 0, 0);
+                        }
+                        else {
+                                valueView.setVisibility(View.VISIBLE);
+                                keyView.setTextSize(18);
+                                if(position != 0 && getItem(position - 1).getKey().trim().charAt(0) == '•'
+                                        && info.getKey().trim().charAt(0) != '•'){
+                                        //Log.e("jk", "" + first_char);
+                                        keyView.setPadding(0, 200, 0, 200);
+                                }
+                                else {
+                                        keyView.setPadding(0, 0, 0, 0);
+                                }
+                        }
+
                         return convertView;
+                }
+        }
+
+        private void rearrangeDetails(ArrayList<Info> infos){
+                infos.add(0, new Info("General", ""));
+                int count = 1;
+                for(int i = 1;i < infos.size();i ++){
+                        Info info = infos.get(i);
+                        if(!info.getValue().trim().equals("") && !(info.getKey().trim().charAt(0) == '•')){
+                                Log.e("jhb", info.getKey() + " : " + info.getValue());
+                                infos.remove(i);
+                                info.setKey("• " + info.getKey());
+                                infos.add(count, info);
+                                count ++;
+                        }
                 }
         }
 
@@ -146,6 +179,7 @@ public class Information extends Fragment {
                 @Override
                 protected void onPostExecute(Object o) {
                         ArrayList<Info> infos = (ArrayList<Info>)o;
+                        rearrangeDetails(infos);
                         addInfo(infos);
                 }
 

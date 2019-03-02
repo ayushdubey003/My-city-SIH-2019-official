@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/list"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="6dp"
         android:scrollbars="none"
         android:dividerHeight="0dp"
         android:divider="@null"
