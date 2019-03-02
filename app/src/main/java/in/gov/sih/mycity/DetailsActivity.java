@@ -132,6 +132,14 @@ public class DetailsActivity extends AppCompatActivity {
                                         return new Information().newInstance();
                                 case 1:
                                         return new MainAttractions().newInstance();
+                                case 3:
+                                        return new Information().newInstance();
+                                case 4:
+                                        return new Information().newInstance();
+                                case 5:
+                                        return new Information().newInstance();
+                                case 6:
+
                                 default:
                                         return null;
                         }

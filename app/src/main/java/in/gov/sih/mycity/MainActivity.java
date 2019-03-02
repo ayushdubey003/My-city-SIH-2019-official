@@ -53,7 +53,8 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         setContentView(R.layout.activity_main);
         //startActivity(new Intent(this, DetailsActivity.class));finish();
         user=findViewById(R.id.user);
-        user.setText("Welcome "+FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+//        user.setText("Welcome "+FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        user.setVisibility(View.GONE);
         InputStream inputStream = getResources().openRawResource(R.raw.cities);
         ParseCity city = new ParseCity(inputStream);
         List<String> cities = city.getCity(MainActivity.this);
