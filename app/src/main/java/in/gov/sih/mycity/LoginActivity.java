@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -24,82 +25,83 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.io.IOException;
+import java.util.Arrays;
+
 public class LoginActivity extends AppCompatActivity {
 
-    FirebaseAuth mAuth=null;
-    GoogleSignInClient mGoogleSignClient;
-    int RC_SIGN_IN=0001;
-    SignInButton sign;
+    public static final int RC_SIGN_IN = 1;
+    public static final String ANONYMOUS = "ANONYMOUS";
+
+    private FirebaseAuth mAuth;
+    private String mUsername;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        startActivity(new Intent(LoginActivity.this,MainActivity.class));
-        finish();
+        mUsername = ANONYMOUS;
         mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
-        }
-        sign=findViewById(R.id.sign_in_button);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("532769098137-2j034mfa7mqjamlbm1tjs8s0c92pskgm.apps.googleusercontent.com")
-                .requestEmail()
-                .build();
-        mGoogleSignClient=GoogleSignIn.getClient(this,gso);
-
-        sign.setOnClickListener(new View.OnClickListener() {
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onClick(View v) {
-                signIn();
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    onSignedInInitialize(user.getDisplayName());
+
+                    boolean emailVerified = user.isEmailVerified();
+                    if(emailVerified == false){
+                        user.sendEmailVerification();
+                        Intent intent = new Intent(LoginActivity.this,EmailNotVerified.class);
+                        startActivity(intent);
+                    }
+                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                }
+                else{
+                    onSignedOutCleanUp();
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setIsSmartLockEnabled(false)
+                                    .setAvailableProviders(Arrays.asList(
+                                            new AuthUI.IdpConfig.GoogleBuilder().build(),
+                                            new AuthUI.IdpConfig.EmailBuilder().build()))
+                                    .build(),
+                            RC_SIGN_IN);
+                }
             }
-        });
+        };
     }
 
-        private void signIn() {
-            Intent signInIntent =mGoogleSignClient.getSignInIntent();
-            startActivityForResult(signInIntent, RC_SIGN_IN);
-        }
+    private void onSignedOutCleanUp() {
+        mUsername = ANONYMOUS;
+    }
 
-        @Override
-        public void onActivityResult(int requestCode, int resultCode, Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
+    private void onSignedInInitialize(String displayName) {
+        mUsername = displayName;
+    }
 
-            if (requestCode == RC_SIGN_IN && resultCode==RESULT_OK) {
-                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-                try {
-                    GoogleSignInAccount account = task.getResult(ApiException.class);
-                    firebaseAuthWithGoogle(account);
-                } catch (ApiException e) {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAuth.addAuthStateListener(mAuthStateListener);
+    }
 
-
-                                    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            if (resultCode == RESULT_OK) {
+                // Sign-in succeeded, set up the UI
+                Toast.makeText(this, "Signed in!", Toast.LENGTH_SHORT).show();
+            } else if (resultCode == RESULT_CANCELED) {
+                // Sign in was canceled by the user, finish the activity
+                Toast.makeText(this, "Sign in canceled", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
-
-
-        private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-            Log.d("", "firebaseAuthWithGoogle:" + acct.getId());
-
-            AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-            Log.i("fireba",credential.toString());
-            mAuth.signInWithCredential(credential)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                                finish();
-                            }
-                            else {
-                                Toast.makeText(LoginActivity.this, "Unable to Sign In. Please try Again", Toast.LENGTH_SHORT).show();
-                            }
-
-
-                        }
-                    });
-        }
     }
+}
 

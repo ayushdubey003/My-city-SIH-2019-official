@@ -17,4 +17,9 @@
         <item>Mumbai</item>
         <item>Pune</item>
     </string-array>
+    <string name="title_activity_email_not_verified">Email Not Verified</string>
+    <string name="verify_email">Please Verify Your Email and Try Again</string>
+    <string name="login">Login</string>
+    <string name="try_again">TRY AGAIN</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
