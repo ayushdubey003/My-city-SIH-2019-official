@@ -95,7 +95,8 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         loc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestSingleLocationFix(easyLocationRequest);
+               // requestSingleLocationFix(easyLocationRequest);
+                mAutoCompleteTextView.setText(getString(R.string.getLocationFromGeoCoder));
             }
         });
 
