@@ -38,7 +38,7 @@ import java.util.Locale;
 public class MainActivity extends EasyLocationAppCompatActivity {
     private double lati, longi;
     TextView user;
-    private String address, district = "";
+    private String address, district = "",location="Noida";
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     static AutoCompleteTextView mAutoCompleteTextView;
     SharedPreferences mSharedPreferences;
@@ -78,8 +78,7 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         loc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //requestSingleLocationFix(easyLocationRequest);
-                mAutoCompleteTextView.setText("Noida");
+                requestSingleLocationFix(easyLocationRequest);
             }
         });
 
