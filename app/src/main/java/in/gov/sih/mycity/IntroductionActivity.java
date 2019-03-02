@@ -1,5 +1,7 @@
 package in.gov.sih.mycity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -7,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +20,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
 
 
 public class IntroductionActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -63,7 +68,7 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         utilities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(IntroductionActivity.this,"Utilities Clicked",Toast.LENGTH_LONG).show();
+                showUtility();
             }
         });
 
@@ -96,5 +101,70 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
         CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(location, 8);
         mMap.animateCamera(yourLocation);
+    }
+
+    public void showUtility()
+    {
+        final String url ;
+        final Intent intent=new Intent(Intent.ACTION_VIEW);
+        //startActivity(intent);
+        AlertDialog.Builder builder=new AlertDialog.Builder(IntroductionActivity.this);
+        builder.setTitle("Select utility");
+        final ArrayList<String> utilities=new ArrayList<>();
+        utilities.add("Post Office");
+        utilities.add("Police Stations");
+        utilities.add("Petrol Pumps");
+        utilities.add("ATMs");
+        utilities.add("General Stores");
+        utilities.add("Bus Stand");
+        utilities.add("Airport");
+        utilities.add("Port");
+        utilities.add("Restaurants");
+
+        ArrayAdapter<String> uuttii=new ArrayAdapter<>(IntroductionActivity.this,android.R.layout.simple_list_item_1,utilities);
+        builder.setAdapter(uuttii, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch(which)
+                {
+                    case 0:  intent.setData(Uri.parse(mUrl+"Post+Office+in "+address));
+                        break;
+                    case 1:  intent.setData(Uri.parse(mUrl+"Police+Stations+in "+address));
+                        break;
+                    case 2:  intent.setData(Uri.parse(mUrl+"Petrol+Pumps+in "+address));
+                        break;
+                    case 3:  intent.setData(Uri.parse(mUrl+"ATMs+in "+address));
+                        break;
+                    case 4:  intent.setData(Uri.parse(mUrl+"General+Stores+in "+address));
+                        break;
+                    case 5:  intent.setData(Uri.parse(mUrl+"Bus+Stands+in "+address));
+                        break;
+                    case 6:  intent.setData(Uri.parse(mUrl+"Airports+in "+address));
+                        break;
+                    case 7:  intent.setData(Uri.parse(mUrl+"Ports+in "+address));
+                        break;
+                    case 8:  intent.setData(Uri.parse(mUrl+"Restaurants+in "+address));
+                        break;
+
+
+
+                }
+
+                startActivity(intent);
+            }
+        });
+
+        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+
+        Dialog dialog=builder.create();
+        dialog.show();
+
+
     }
 }
