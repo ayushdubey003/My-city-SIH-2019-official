@@ -1,27 +1,27 @@
 <resources>
-    <string name="app_name">My City</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_introduction">Map</string>
-    <string name="title_activity_information">Information</string>
-    <string-array name="spinner_array">
-        <item>Schools</item>
-        <item>Colleges</item>
-    </string-array>
-    <string-array name="common_cities_name">
-        <item>Bangalore</item>
-        <item>Chennai</item>
-        <item>New Delhi</item>
-        <item>Hyderabad</item>
-        <item>Kolkata</item>
-        <item>Mumbai</item>
-        <item>Pune</item>
-    </string-array>
-    <string name="title_activity_email_not_verified">Email Not Verified</string>
-    <string name="verify_email">Please Verify Your Email and Try Again</string>
-    <string name="login">Login</string>
-    <string name="try_again">TRY AGAIN</string>
-    <string name="sign_out">Sign Out</string>
-    <string name="enter_journal_message">Enter your journal here</string>
-    <string name="getLocationFromGeoCoder">Noida</string>
+        <string name="app_name">My City</string>
+        <!-- TODO: Remove or change this placeholder text -->
+        <string name="hello_blank_fragment">Hello blank fragment</string>
+        <string name="title_activity_introduction">Map</string>
+        <string name="title_activity_information">Information</string>
+        <string-array name="spinner_array">
+                <item>Schools</item>
+                <item>Colleges</item>
+        </string-array>
+        <string-array name="common_cities_name">
+                <item>Bangalore</item>
+                <item>Chennai</item>
+                <item>New Delhi</item>
+                <item>Hyderabad</item>
+                <item>Kolkata</item>
+                <item>Mumbai</item>
+                <item>Pune</item>
+        </string-array>
+        <string name="title_activity_email_not_verified">Email Not Verified</string>
+        <string name="verify_email">Please Verify Your Email and Try Again</string>
+        <string name="login">Login</string>
+        <string name="try_again">TRY AGAIN</string>
+        <string name="sign_out">Sign Out</string>
+        <string name="enter_journal_message">Enter your journal here</string>
+        <string name="getLocationFromGeoCoder">Noida</string>
 </resources>
