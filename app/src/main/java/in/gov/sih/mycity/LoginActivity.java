@@ -73,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivityForResult(
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
+                                    .setLogo(R.drawable.sih_logo)
                                     .setIsSmartLockEnabled(false)
                                     .setAvailableProviders(Arrays.asList(
                                             new AuthUI.IdpConfig.GoogleBuilder().build(),
