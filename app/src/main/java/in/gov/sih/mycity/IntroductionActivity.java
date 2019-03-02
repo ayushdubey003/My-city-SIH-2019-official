@@ -1,6 +1,8 @@
 package in.gov.sih.mycity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -54,7 +56,7 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(IntroductionActivity.this,"Info Clicked",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(IntroductionActivity.this,DetailsActivity.class));
             }
         });
 
@@ -68,7 +70,10 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         redirectMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(IntroductionActivity.this,"Show on Map Clicked",Toast.LENGTH_LONG).show();
+                String url=mUrl+address;
+                Uri uri=Uri.parse(url);
+                Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent);
             }
         });
 

@@ -127,7 +127,8 @@ public class DetailsActivity extends AppCompatActivity {
                 @Override
                 public Fragment getItem(int i) {
                         switch (i) {
-                                //Add your fragments here
+                                case 0:
+                                        return new Information().newInstance();
                                 default:
                                         return null;
                         }
