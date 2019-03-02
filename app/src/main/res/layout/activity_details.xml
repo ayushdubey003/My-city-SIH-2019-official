@@ -1,148 +1,148 @@
 <LinearLayout android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical">
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:padding="12dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:padding="12dp">
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:text=" City Details"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold"
-                        android:id="@+id/fragment_title"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text=" City Details"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:id="@+id/fragment_title"/>
 
         </LinearLayout>
 
         <android.support.v7.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:elevation="12dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="12dp">
 
                 <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scrollbars="none"
-                        android:paddingTop="15dp"
-                        android:paddingBottom="15dp"
-                        android:id="@+id/horizontalscrollview">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:id="@+id/horizontalscrollview">
 
                         <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
                                 <RelativeLayout
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1"
-                                        android:layout_height="wrap_content"
-                                        android:paddingLeft="20dp"
-                                        android:paddingRight="20dp">
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="20dp"
+                                    android:paddingRight="20dp">
 
                                         <ImageView
-                                                android:layout_width="96px"
-                                                android:layout_height="96px"
-                                                android:src="@drawable/icon_about"
-                                                android:scaleType="centerCrop"
-                                                android:layout_centerInParent="true"
-                                                android:alpha="0.78"
-                                                android:id="@+id/tab1"/>
+                                            android:layout_width="96px"
+                                            android:layout_height="96px"
+                                            android:src="@drawable/icon_about"
+                                            android:scaleType="centerCrop"
+                                            android:layout_centerInParent="true"
+                                            android:alpha="0.78"
+                                            android:id="@+id/tab1"/>
 
                                 </RelativeLayout>
 
                                 <RelativeLayout
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1"
-                                        android:layout_height="wrap_content"
-                                        android:paddingLeft="20dp"
-                                        android:paddingRight="20dp">
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="20dp"
+                                    android:paddingRight="20dp">
 
                                         <ImageView
-                                                android:layout_width="96px"
-                                                android:layout_height="96px"
-                                                android:src="@drawable/icon_places"
-                                                android:scaleType="centerCrop"
-                                                android:layout_centerInParent="true"
-                                                android:alpha="0.3"
-                                                android:id="@+id/tab2"/>
+                                            android:layout_width="96px"
+                                            android:layout_height="96px"
+                                            android:src="@drawable/icon_places"
+                                            android:scaleType="centerCrop"
+                                            android:layout_centerInParent="true"
+                                            android:alpha="0.3"
+                                            android:id="@+id/tab2"/>
 
                                 </RelativeLayout>
 
                                 <RelativeLayout
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1"
-                                        android:layout_height="wrap_content"
-                                        android:paddingLeft="20dp"
-                                        android:paddingRight="20dp">
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="20dp"
+                                    android:paddingRight="20dp">
 
                                         <ImageView
-                                                android:layout_width="96px"
-                                                android:layout_height="96px"
-                                                android:src="@drawable/icon_education"
-                                                android:scaleType="centerCrop"
-                                                android:layout_centerInParent="true"
-                                                android:alpha="0.3"
-                                                android:id="@+id/tab3"/>
+                                            android:layout_width="96px"
+                                            android:layout_height="96px"
+                                            android:src="@drawable/icon_education"
+                                            android:scaleType="centerCrop"
+                                            android:layout_centerInParent="true"
+                                            android:alpha="0.3"
+                                            android:id="@+id/tab3"/>
 
                                 </RelativeLayout>
 
                                 <RelativeLayout
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1"
-                                        android:layout_height="wrap_content"
-                                        android:paddingLeft="20dp"
-                                        android:paddingRight="20dp">
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="20dp"
+                                    android:paddingRight="20dp">
 
                                         <ImageView
-                                                android:layout_width="96px"
-                                                android:layout_height="96px"
-                                                android:src="@drawable/icon_hospital"
-                                                android:scaleType="centerCrop"
-                                                android:layout_centerInParent="true"
-                                                android:alpha="0.3"
-                                                android:id="@+id/tab4"/>
+                                            android:layout_width="96px"
+                                            android:layout_height="96px"
+                                            android:src="@drawable/icon_hospital"
+                                            android:scaleType="centerCrop"
+                                            android:layout_centerInParent="true"
+                                            android:alpha="0.3"
+                                            android:id="@+id/tab4"/>
 
                                 </RelativeLayout>
 
                                 <RelativeLayout
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1"
-                                        android:layout_height="wrap_content"
-                                        android:paddingLeft="20dp"
-                                        android:paddingRight="20dp">
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="20dp"
+                                    android:paddingRight="20dp">
 
                                         <ImageView
-                                                android:layout_width="96px"
-                                                android:layout_height="96px"
-                                                android:src="@drawable/icon_hotel"
-                                                android:scaleType="centerCrop"
-                                                android:layout_centerInParent="true"
-                                                android:alpha="0.3"
-                                                android:id="@+id/tab5"/>
+                                            android:layout_width="96px"
+                                            android:layout_height="96px"
+                                            android:src="@drawable/icon_hotel"
+                                            android:scaleType="centerCrop"
+                                            android:layout_centerInParent="true"
+                                            android:alpha="0.3"
+                                            android:id="@+id/tab5"/>
 
                                 </RelativeLayout>
 
                                 <RelativeLayout
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1"
-                                        android:layout_height="wrap_content"
-                                        android:paddingLeft="20dp"
-                                        android:paddingRight="20dp">
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="20dp"
+                                    android:paddingRight="20dp">
 
                                         <ImageView
-                                                android:layout_width="96px"
-                                                android:layout_height="96px"
-                                                android:src="@drawable/icon_train"
-                                                android:scaleType="centerCrop"
-                                                android:layout_centerInParent="true"
-                                                android:alpha="0.3"
-                                                android:id="@+id/tab6"/>
+                                            android:layout_width="96px"
+                                            android:layout_height="96px"
+                                            android:src="@drawable/icon_train"
+                                            android:scaleType="centerCrop"
+                                            android:layout_centerInParent="true"
+                                            android:alpha="0.3"
+                                            android:id="@+id/tab6"/>
 
                                 </RelativeLayout>
 
@@ -153,16 +153,16 @@
         </android.support.v7.widget.CardView>
 
         <android.support.design.widget.TabLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.0"
-                android:id="@+id/details_tablayout"
-                android:layout_gravity="center_vertical" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.0"
+            android:id="@+id/details_tablayout"
+            android:layout_gravity="center_vertical" />
 
         <android.support.v4.view.ViewPager
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.94"
-                android:id="@+id/details_viewpager"/>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.94"
+            android:id="@+id/details_viewpager"/>
 
 </LinearLayout>

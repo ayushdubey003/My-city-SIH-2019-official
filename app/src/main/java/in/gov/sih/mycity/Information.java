@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -40,6 +41,7 @@ public class Information extends Fragment {
         private TextView cityName;
         private String city;
         private String state;
+        private RelativeLayout progressBar;
 
         public Information() {
                 // Required empty public constructor
@@ -65,12 +67,12 @@ public class Information extends Fragment {
                 info = new ArrayList<>();
                 city = sharedPreferences.getString("address"," ");
                 state = statePreferences.getString(city," ");
-                cityName.setText(city);
-
 
                 arrayAdapter = new InfoAdapter( getActivity(),1,new ArrayList<Info>());
                 arrayAdapter.addAll(info);
                 list.setAdapter(arrayAdapter);
+
+                progressBar = (RelativeLayout)returnView.findViewById(R.id.progress_bar);
 
                 getInfo();
 
@@ -231,7 +233,7 @@ public class Information extends Fragment {
         private void addInfo(ArrayList<Info> info){
                 arrayAdapter.clear();
                 arrayAdapter.addAll(info);
-                //progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
         }
 
 

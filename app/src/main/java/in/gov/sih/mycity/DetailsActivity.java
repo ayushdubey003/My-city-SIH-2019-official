@@ -18,13 +18,14 @@ public class DetailsActivity extends AppCompatActivity {
         private ViewPager viewPager;
         private TabLayout tabLayout;
         private ImageView tabs[];
-        private static final int number_of_tabs = 0;
+        private static final int number_of_tabs = 1;
         private HorizontalScrollView horizontalScrollView;
         private String city;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
+                //getActionBar().hide();
                 setContentView(R.layout.activity_details);
 
                 horizontalScrollView = (HorizontalScrollView)findViewById(R.id.horizontalscrollview);
@@ -38,7 +39,7 @@ public class DetailsActivity extends AppCompatActivity {
                 viewPager.setAdapter(myPagerAdapter);
                 tabLayout.setupWithViewPager(viewPager);
                 viewPager.setOffscreenPageLimit(6);
-                tabLayout.getTabAt(0).setIcon(R.drawable.icon_places);
+               // tabLayout.getTabAt(0).setIcon(R.drawable.icon_places);
 
                 tabs = new ImageView[]{((ImageView)findViewById(R.id.tab1)), ((ImageView)findViewById(R.id.tab2)),
                         ((ImageView)findViewById(R.id.tab3)), ((ImageView)findViewById(R.id.tab4)),
@@ -137,7 +138,7 @@ public class DetailsActivity extends AppCompatActivity {
                 @Override
                 public int getCount() {
                         //Modify the return value to include your fragment
-                        return 0;
+                        return number_of_tabs;
                 }
         }
 }
