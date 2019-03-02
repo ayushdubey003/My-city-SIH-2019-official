@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.CardView
-        android:layout_width="150dp"
-        android:layout_margin="10dp"
-        android:elevation="10dp"
-        app:cardCornerRadius="10dp"
-        android:layout_height="160dp"
+            android:layout_width="150dp"
+            android:layout_margin="10dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="8dp"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true">
 
-        android:layout_alignParentTop="true">
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/common_cities_image"
-                android:scaleType="fitXY"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/abs_back2"/>
+                android:layout_height="wrap_content">
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000">
+                <ImageView
+                        android:id="@+id/common_cities_image"
+                        android:scaleType="centerCrop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/abs_back2"
+                        android:alpha="0.6"/>
+            </LinearLayout>
             <TextView
-                android:id="@+id/city_name"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:layout_centerHorizontal="true"
-                android:textSize="20sp"
-                android:layout_alignParentBottom="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="level"/>
+                    android:id="@+id/city_name"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="22sp"
+                    android:layout_marginTop="75dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="level" />
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
