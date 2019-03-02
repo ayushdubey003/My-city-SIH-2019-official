@@ -18,7 +18,7 @@ public class DetailsActivity extends AppCompatActivity {
         private ViewPager viewPager;
         private TabLayout tabLayout;
         private ImageView tabs[];
-        private static final int number_of_tabs = 1;
+        private static final int number_of_tabs = 2;
         private HorizontalScrollView horizontalScrollView;
         private String city;
 
@@ -130,6 +130,8 @@ public class DetailsActivity extends AppCompatActivity {
                         switch (i) {
                                 case 0:
                                         return new Information().newInstance();
+                                case 1:
+                                        return new MainAttractions().newInstance();
                                 default:
                                         return null;
                         }
