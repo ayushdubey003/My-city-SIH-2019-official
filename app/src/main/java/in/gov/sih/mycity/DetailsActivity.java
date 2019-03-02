@@ -18,7 +18,7 @@ public class DetailsActivity extends AppCompatActivity {
         private ViewPager viewPager;
         private TabLayout tabLayout;
         private ImageView tabs[];
-        private static final int number_of_tabs = 2;
+        private static final int number_of_tabs = 3;
         private HorizontalScrollView horizontalScrollView;
         private String city;
 
@@ -99,7 +99,7 @@ public class DetailsActivity extends AppCompatActivity {
                                 fragmentTitle = "Places of " + city;
                                 break;
                         case 2:
-                                fragmentTitle = "Education in " + city;
+                                fragmentTitle = "Trains From " + city;
                                 break;
                         case 3:
                                 fragmentTitle = "Hospitals in " + city;
@@ -132,14 +132,8 @@ public class DetailsActivity extends AppCompatActivity {
                                         return new Information().newInstance();
                                 case 1:
                                         return new MainAttractions().newInstance();
-                                case 3:
-                                        return new Information().newInstance();
-                                case 4:
-                                        return new Information().newInstance();
-                                case 5:
-                                        return new Information().newInstance();
-                                case 6:
-
+                                case 2:
+                                        return new TrainScheduleFragment().newInstance();
                                 default:
                                         return null;
                         }
