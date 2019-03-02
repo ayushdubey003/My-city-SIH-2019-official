@@ -66,6 +66,7 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         //startActivity(new Intent(this, DetailsActivity.class));finish();
         user=findViewById(R.id.user);
         connectToFirebase();
+        user.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
        // user.setVisibility(View.GONE);
         InputStream inputStream = getResources().openRawResource(R.raw.cities);
         ParseCity city = new ParseCity(inputStream);
@@ -227,42 +228,7 @@ public class MainActivity extends EasyLocationAppCompatActivity {
     }
 
     public void connectToFirebase(){
-        mUsername = ANONYMOUS;
-        mAuth = FirebaseAuth.getInstance();
 
-        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-                    onSignedInInitialize(user.getDisplayName());
-
-                    boolean emailVerified = user.isEmailVerified();
-                    if(emailVerified == false){
-                        user.sendEmailVerification();
-                        Intent intent = new Intent(MainActivity.this,EmailNotVerified.class);
-                        startActivity(intent);
-                    }
-                    try {
-                        UpdateUI(user);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                else{
-                    onSignedOutCleanUp();
-                    startActivityForResult(
-                            AuthUI.getInstance()
-                                    .createSignInIntentBuilder()
-                                    .setIsSmartLockEnabled(false)
-                                    .setAvailableProviders(Arrays.asList(
-                                            new AuthUI.IdpConfig.GoogleBuilder().build(),
-                                            new AuthUI.IdpConfig.EmailBuilder().build()))
-                                    .build(),
-                            RC_SIGN_IN);
-                }
-            }
-        };
     }
 
     private void UpdateUI(FirebaseUser users) throws IOException {
@@ -278,44 +244,7 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         //TODO: Add Profile Image in Nav Bar
     }
 
-    private void onSignedOutCleanUp() {
-        mUsername = ANONYMOUS;
-    }
 
-    private void onSignedInInitialize(String displayName) {
-        mUsername = displayName;
-    }
-
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mAuth.addAuthStateListener(mAuthStateListener);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN) {
-            if (resultCode == RESULT_OK) {
-                // Sign-in succeeded, set up the UI
-                Toast.makeText(this, "Signed in!", Toast.LENGTH_SHORT).show();
-            } else if (resultCode == RESULT_CANCELED) {
-                // Sign in was canceled by the user, finish the activity
-                Toast.makeText(this, "Sign in canceled", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }
-    }
 }
 
 class common_cities_adapter extends RecyclerView.Adapter<common_cities_adapter.ViewHolder> {
