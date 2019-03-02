@@ -85,7 +85,7 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(IntroductionActivity.this,"Emergency Numbers Clicked",Toast.LENGTH_LONG).show();
+                showList();
             }
         });
 
@@ -166,5 +166,80 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         dialog.show();
 
 
+    }
+
+    public void showList()
+    {
+
+        final ArrayList<String> emer=new ArrayList<>();
+        emer.add("Emergency");
+        emer.add("Police");
+        emer.add("Fire");
+        emer.add("Ambulance");
+        emer.add("Ambulance");
+        emer.add("Gas Leakage");
+        emer.add("Tourist-Helpline");
+        emer.add("Child-Helpline");
+        emer.add("Blood-Requirement");
+        emer.add("Women-Helpline");
+        emer.add("Ambulance Network (Emergency or Non-Emergency)");
+
+
+        final ArrayList<String> num=new ArrayList<>();
+        num.add("112");
+        num.add("100");
+        num.add("102");
+        num.add("108");
+        num.add("1906");
+        num.add("1363");
+        num.add("1098");
+        num.add("104");
+        num.add("181");
+        num.add("09343180000");
+
+        builder.setTitle("Emergency Numbers");
+        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        final Intent intent =new Intent(Intent.ACTION_DIAL);
+        ArrayAdapter<String> adapter=new ArrayAdapter<>(IntroductionActivity.this,android.R.layout.simple_list_item_1,emer);
+        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch(which)
+                {
+
+                    case 0: intent.setData(Uri.parse("tel:"+num.get(0)));
+                        break;
+                    case 1: intent.setData(Uri.parse("tel:"+num.get(1)));
+                        break;
+                    case 2: intent.setData(Uri.parse("tel:"+num.get(2)));
+                        break;
+                    case 3: intent.setData(Uri.parse("tel:"+num.get(3)));
+                        break;
+                    case 4: intent.setData(Uri.parse("tel:"+num.get(4)));
+                        break;
+                    case 5: intent.setData(Uri.parse("tel:"+num.get(5)));
+                        break;
+                    case 6: intent.setData(Uri.parse("tel:"+num.get(6)));
+                        break;
+                    case 7: intent.setData(Uri.parse("tel:"+num.get(7)));
+                        break;
+                    case 8: intent.setData(Uri.parse("tel:"+num.get(8)));
+                        break;
+                    case 9: intent.setData(Uri.parse("tel:"+num.get(9)));
+                        break;
+                }
+
+                startActivity(intent);
+
+            }
+        });
+
+        AlertDialog dialog=builder.create();
+        dialog.show();
     }
 }
