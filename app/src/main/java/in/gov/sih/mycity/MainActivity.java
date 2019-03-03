@@ -246,19 +246,10 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         home = (LinearLayout) findViewById(R.id.home);
         profile = (LinearLayout) findViewById(R.id.profile);
 
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                home.setAlpha(1f);
-                profile.setAlpha(0.3f);
-            }
-        });
-
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                home.setAlpha(0.3f);
-                profile.setAlpha(1f);
+                startActivity(new Intent(MainActivity.this,ProfileActivity.class));
             }
         });
 
