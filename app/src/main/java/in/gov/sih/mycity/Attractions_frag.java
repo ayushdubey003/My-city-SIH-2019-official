@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +33,7 @@ public class Attractions_frag extends Fragment {
      ArrayList<AttractionModel> attractionModels;
      RecyclerView recyclerView;
      Attraction_Adapter attraction_adapter;
+     RelativeLayout progressBar;
 
     public Attractions_frag() {
         // Required empty public constructor
@@ -43,6 +46,8 @@ public class Attractions_frag extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_attractions, container, false);
         recyclerView=view.findViewById(R.id.recycler);
+
+        progressBar = (RelativeLayout) view.findViewById(R.id.progress_bar);
 
         attractionModels=new ArrayList<>();
         dref= FirebaseDatabase.getInstance().getReference("mainattraction");
@@ -61,6 +66,7 @@ public class Attractions_frag extends Fragment {
                   recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                   recyclerView.smoothScrollToPosition(scrollpos);
 
+                  progressBar.setVisibility(View.GONE);
 
             }
 
