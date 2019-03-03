@@ -17,7 +17,7 @@ public class SplashScreen extends AppCompatActivity {
         animationView.addAnimatorUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                startActivity(new Intent(SplashScreen.this,Information.class));
+                startActivity(new Intent(SplashScreen.this,DetailsActivity.class));
             }
         });
     }
