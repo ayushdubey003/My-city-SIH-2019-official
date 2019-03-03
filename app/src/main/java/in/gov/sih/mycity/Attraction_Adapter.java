@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.annotation.GlideModule;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -50,8 +52,8 @@ public class Attraction_Adapter extends RecyclerView.Adapter<Attraction_Adapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-
-        holder.img.setImageResource(R.drawable.backg);
+        Glide.with(context).load(attractionModels.get(position).getUrl()).into(holder.img);
+        //holder.img.setImageResource(R.drawable.backg);
         holder.name.setText(attractionModels.get(position).getName());
         holder.address.setText(attractionModels.get(position).getAddress());
         int revv=(int)attractionModels.get(position).getNum();
