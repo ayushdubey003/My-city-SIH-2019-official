@@ -165,6 +165,8 @@ public class DetailsActivity extends AppCompatActivity {
                     return new HotelFragment();
                 case 6:
                     return new PeopleFragment();
+                case 7:
+                     return new School_fragment();
                 default:
                     return null;
             }

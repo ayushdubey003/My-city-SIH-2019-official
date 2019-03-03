@@ -84,11 +84,6 @@ public class School_Adapter extends RecyclerView.Adapter<School_Adapter.ViewHold
                            editor.putFloat("rrt", ratingBar.getRating());
                            editor.commit();
 
-                           String review=editText.getText().toString();
-                           if(!review.equals(""))
-                           {
-                               DatabaseReference sref=FirebaseDatabase.getInstance().getReference("reviews");
-                           }
 
                        }
                    });
