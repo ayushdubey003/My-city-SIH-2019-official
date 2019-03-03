@@ -2,7 +2,7 @@ package in.gov.sih.mycity;
 
 public class AttractionModel {
 
-    String name,address;
+    String name,address, url;
     float avgrat,num;
 
     public AttractionModel()
@@ -40,5 +40,13 @@ public class AttractionModel {
 
     public void setNum(float num) {
         this.num = num;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
