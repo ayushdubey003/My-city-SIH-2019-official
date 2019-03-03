@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+        <LinearLayout
+            android:background="@drawable/abs_back2"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:scaleType="fitXY"
+                    android:padding="10dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_school_black_24dp"
+                    />
+                <ImageView
+                    android:id="@+id/college_map_nav"
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="10dp"
+
+                    android:layout_alignParentEnd="true"
+                    android:scaleType="fitXY"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_place_black_24dp"
+                    />
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/college_name"
+                    android:layout_weight="8"
+                    android:layout_width="0dp"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:layout_height="wrap_content"
+                    android:text="National Institute Of Technology, Jamshedpur"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="1"
+                    android:textSize="15dp"
+                    android:textColor="#006400"
+                    android:layout_width="0dp"
+                    android:id="@+id/state_dist"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="Saraikela-Kharsawan , Jharkhand"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="0dp"
+                        android:id="@+id/ret_cl"
+                        android:scaleX="0.6"
+                        android:isIndicator="true"
+                        android:scaleY="0.6"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="(79 reviews)"
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:id="@+id/rev_cl"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Rate Us"
+                    android:textStyle="bold"
+                    android:id="@+id/rate_cl"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="#FF0000"
+                    android:text="University Name :"/>
+                <TextView
+                    android:id="@+id/university_name"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:layout_height="wrap_content"
+                    android:text="NIT Jamshedpur"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="#FF0000"
+                    android:paddingLeft="15dp"
+                    android:layout_height="wrap_content"
+                    android:text="University-Type :"/>
+                <TextView
+                    android:id="@+id/university_type"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:paddingBottom="10dp"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:text="-NA-"/>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</FrameLayout>

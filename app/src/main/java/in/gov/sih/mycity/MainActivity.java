@@ -25,9 +25,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.akhgupta.easylocation.EasyLocationAppCompatActivity;
 import com.akhgupta.easylocation.EasyLocationRequest;
 import com.akhgupta.easylocation.EasyLocationRequestBuilder;
@@ -55,6 +57,8 @@ public class MainActivity extends EasyLocationAppCompatActivity {
     private LinearLayout popup;
     private TextView logout;
 
+    private LinearLayout home, profile;
+
 
     private double lati, longi;
     private TextView user;
@@ -76,7 +80,7 @@ public class MainActivity extends EasyLocationAppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(Intent.ACTION_MAIN);
+        Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
@@ -87,9 +91,9 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //startActivity(new Intent(this, DetailsActivity.class));finish();
-        user=findViewById(R.id.user);
+        user = findViewById(R.id.user);
         user.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-       // user.setVisibility(View.GONE);
+
         InputStream inputStream = getResources().openRawResource(R.raw.cities);
         ParseCity city = new ParseCity(inputStream);
         List<String> cities = city.getCity(MainActivity.this);
@@ -114,7 +118,7 @@ public class MainActivity extends EasyLocationAppCompatActivity {
             @Override
             public void onClick(View v) {
                 requestSingleLocationFix(easyLocationRequest);
-               // mAutoCompleteTextView.setText(getString(R.string.getLocationFromGeoCoder));
+                //mAutoCompleteTextView.setText(getString(R.string.getLocationFromGeoCoder));
             }
         });
 
@@ -201,7 +205,7 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         popupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(popup.getVisibility() == View.GONE){
+                if (popup.getVisibility() == View.GONE) {
                     layer.setVisibility(View.VISIBLE);
                     popup.setVisibility(View.VISIBLE);
                     popup.bringToFront();
@@ -225,7 +229,7 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                // startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 AuthUI.getInstance()
                         .signOut(MainActivity.this)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -236,6 +240,16 @@ public class MainActivity extends EasyLocationAppCompatActivity {
                             }
                         });
                 Toast.makeText(MainActivity.this, "Signed out!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        home = (LinearLayout) findViewById(R.id.home);
+        profile = (LinearLayout) findViewById(R.id.profile);
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,ProfileActivity.class));
             }
         });
 
@@ -324,10 +338,9 @@ public class MainActivity extends EasyLocationAppCompatActivity {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        super.onActivityResult(requestCode,resultCode,data);
-        switch (requestCode){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
             case REQ_CODE_SPEECH_INPUT:
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
@@ -398,9 +411,6 @@ class common_cities_adapter extends RecyclerView.Adapter<common_cities_adapter.V
 
 
     }
-
-
-
 
 
 }

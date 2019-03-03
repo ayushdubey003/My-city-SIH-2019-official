@@ -20,6 +20,9 @@
         <activity android:name=".DetailsActivity" />
         <activity
             android:name=".LoginActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".SplashScreen"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,8 +51,8 @@
         <activity android:name=".weather_activity" />
         <activity android:name=".WebViewActivity" />
         <activity android:name=".EmailNotVerified" />
-        <activity android:name=".HotelFragment" />
-        <activity android:name=".PeopleFragment"></activity>
+        <activity android:name=".railway_web_activity" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

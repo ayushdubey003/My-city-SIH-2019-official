@@ -58,7 +58,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         holder.ret.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                HotelFragment.scrollPos = position;
                 AlertDialog.Builder builder=new AlertDialog.Builder(context);
                 final RatingBar ratingBar=new RatingBar(context);
                 ratingBar.setPadding(100, 100, 100, 0);

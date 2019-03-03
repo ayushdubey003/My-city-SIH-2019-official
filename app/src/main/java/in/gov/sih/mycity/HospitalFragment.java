@@ -26,6 +26,8 @@ public class HospitalFragment extends Fragment {
     RecyclerView recyclerView;
     HospitalAdapter hospitalAdapter;
 
+    public static int scrollPos = 0;
+
     public HospitalFragment() {
         // Required empty public constructor
     }
@@ -54,7 +56,7 @@ public class HospitalFragment extends Fragment {
                 hospitalAdapter=new HospitalAdapter(hospitalModels);
                 recyclerView.setAdapter(hospitalAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+                recyclerView.scrollToPosition(scrollPos);
 
             }
 

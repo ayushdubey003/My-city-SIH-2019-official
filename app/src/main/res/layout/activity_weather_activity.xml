@@ -75,7 +75,6 @@
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 android:textSize="18dp"
-                android:text="main"
                 android:id="@+id/desc"
                 />
         </LinearLayout>
@@ -101,7 +100,6 @@
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 android:textSize="18dp"
-                android:text="main"
                 android:id="@+id/temp"
                 />
         </LinearLayout>
@@ -127,7 +125,6 @@
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 android:textSize="18dp"
-                android:text="main"
                 android:id="@+id/temp_max"
                 />
         </LinearLayout>
@@ -153,7 +150,6 @@
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 android:textSize="18dp"
-                android:text="main"
                 android:id="@+id/temp_min"
                 />
         </LinearLayout>
@@ -179,7 +175,6 @@
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 android:textSize="18dp"
-                android:text="main"
                 android:id="@+id/pressure"
                 />
         </LinearLayout>
@@ -205,7 +200,6 @@
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 android:textSize="18dp"
-                android:text="main"
                 android:id="@+id/humidity"
                 />
         </LinearLayout>
@@ -232,7 +226,6 @@
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 android:textSize="18dp"
-                android:text="main"
                 android:id="@+id/windspeed"
                 />
         </LinearLayout>
@@ -258,7 +251,6 @@
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 android:textSize="18dp"
-                android:text="main"
                 android:id="@+id/wind_dir"
                 />
         </LinearLayout>

@@ -26,6 +26,8 @@ public class HotelFragment extends Fragment {
     RecyclerView recyclerView;
     HotelAdapter hotelAdapter;
 
+    public static int scrollPos = 0;
+
     public HotelFragment() {
         // Required empty public constructor
     }
@@ -55,7 +57,7 @@ public class HotelFragment extends Fragment {
                 recyclerView.setAdapter(hotelAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
+                recyclerView.scrollToPosition(scrollPos);
             }
 
             @Override
