@@ -63,7 +63,6 @@ public class DetailsActivity extends AppCompatActivity {
         tabs = new ImageView[]{((ImageView) findViewById(R.id.tab1)), ((ImageView) findViewById(R.id.tab2)),
                 ((ImageView) findViewById(R.id.tab3)), ((ImageView) findViewById(R.id.tab4)),
                 ((ImageView) findViewById(R.id.tab5)), ((ImageView) findViewById(R.id.tab6)),
-                ((ImageView) findViewById(R.id.tab6)),((ImageView) findViewById(R.id.tab6)),
                 ((ImageView) findViewById(R.id.tab7)), ((ImageView) findViewById(R.id.tab8))};
 
         for (int i = 0; i < number_of_tabs; i++) {
