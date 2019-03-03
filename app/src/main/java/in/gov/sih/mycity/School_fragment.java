@@ -34,6 +34,8 @@ public class School_fragment extends Fragment {
     DatabaseReference dref,dref2;
     Spinner spinner;
 
+    public static int scrollPos = 0;
+
     public School_fragment() {
 
         // Required empty public constructor
@@ -86,7 +88,7 @@ public class School_fragment extends Fragment {
                 Log.i("onDataChange: ",""+schoolmodels.size());
                 school_adapter=new School_Adapter(schoolmodels);
                 recyclerView.setAdapter(school_adapter);
-
+                recyclerView.scrollToPosition(scrollPos);
             }
 
             @Override

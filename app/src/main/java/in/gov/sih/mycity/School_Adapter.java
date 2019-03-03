@@ -92,7 +92,7 @@ public class School_Adapter extends RecyclerView.Adapter<School_Adapter.ViewHold
            viewHolder.rev.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
-
+                   School_fragment.scrollPos = i;
                    AlertDialog.Builder builder=new AlertDialog.Builder(context);
                    LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                    View layout=inflater.inflate(R.layout.dialog_recycler,null);
