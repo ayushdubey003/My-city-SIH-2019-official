@@ -30,6 +30,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="?attr/ratingBarStyleSmall"
+                        android:id="@+id/rating_bar"
                         android:layout_marginTop="8dp"/>
 
                 <TextView
@@ -45,7 +46,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:text="230, Navsheel Dham, Kalyanpur, Kanpur"
-                        android:id="@+id/address"
+                        android:id="@+id/desc"
                         android:layout_marginTop="16dp"/>
 
         </LinearLayout>
@@ -59,6 +60,10 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_gravity="center_vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                 <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
@@ -70,12 +75,22 @@
                         <ImageView
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
+                                android:id="@+id/image"
                                 android:src="@drawable/bangalore"
                                 android:scaleType="centerCrop"
                                 android:alpha="0.68"
                                 android:layout_gravity="center_horizontal"/>
 
                 </android.support.v7.widget.CardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rate_us"
+                            android:text="rate us"/>
+
+
+                </LinearLayout>
 
         </RelativeLayout>
 

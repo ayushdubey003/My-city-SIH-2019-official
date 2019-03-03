@@ -1,11 +1,11 @@
 package in.gov.sih.mycity;
 
-public class AttractionModel {
+public class HospitalModel {
 
-    String name,address, url;
+    String name,address;
     float avgrat,num;
 
-    public AttractionModel()
+    public HospitalModel()
     {
 
     }
@@ -40,13 +40,5 @@ public class AttractionModel {
 
     public void setNum(float num) {
         this.num = num;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 }

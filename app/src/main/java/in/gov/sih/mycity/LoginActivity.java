@@ -66,7 +66,8 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoginActivity.this,EmailNotVerified.class);
                         startActivity(intent);
                     }
-                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                    else
+                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 }
                 else{
                     onSignedOutCleanUp();
@@ -74,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setLogo(R.drawable.sih_logo)
-                                    .setIsSmartLockEnabled(false)
+                                    .setIsSmartLockEnabled(true)
                                     .setAvailableProviders(Arrays.asList(
                                             new AuthUI.IdpConfig.GoogleBuilder().build(),
                                             new AuthUI.IdpConfig.EmailBuilder().build()))

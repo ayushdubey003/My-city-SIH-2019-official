@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.speech.RecognizerIntent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class IntroductionActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -40,6 +43,8 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
     SharedPreferences emerPrefs;
     SharedPreferences utilPrefs;
     private String cityName;
+    private ImageView mSpeechButton;
+    private final int REQ_CODE_SPEECH_INPUT = 2;
 
     private static String mUrl="http://maps.google.com/maps?q=";
     @Override
@@ -63,6 +68,7 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         TextView emergency=(TextView)findViewById(R.id.emergency_contact);
         TextView info=(TextView)findViewById(R.id.information);
         TextView redirectMap=(TextView)findViewById(R.id.location);
+        TextView weather_act=(TextView) findViewById(R.id.weather);
 
         address=sharedPreferences.getString("address","No such Location")+" , "
                 +stateCityprefs.getString(sharedPreferences.getString("address","No such Location"),
@@ -70,11 +76,18 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         city_location.setText(address);
         cityName = sharedPreferences.getString("address","No such Location");
 
+        weather_act.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(IntroductionActivity.this,weather_activity.class));
+            }
+        });
 
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(IntroductionActivity.this,DetailsActivity.class));
+                //startActivity(new Intent(IntroductionActivity.this,SplashScreen.class));
             }
         });
 
@@ -309,6 +322,14 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
         nameEdit = (EditText) dialog.findViewById(R.id.utility_name);
         addButton = (TextView) dialog.findViewById(R.id.add);
         cancelButton = (TextView) dialog.findViewById(R.id.cancel);
+        mSpeechButton = (ImageView) dialog.findViewById(R.id.voice_search);
+        mSpeechButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                promptSpeechInput();
+            }
+        });
+
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -328,5 +349,31 @@ public class IntroductionActivity extends FragmentActivity implements OnMapReady
                 dialog.cancel();
             }
         });
+    }
+
+    private void promptSpeechInput() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.enter_journal_message));
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode,resultCode,data);
+        switch (requestCode){
+            case REQ_CODE_SPEECH_INPUT:
+                if (resultCode == RESULT_OK && data != null) {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    nameEdit.setText(result.get(0));
+                }
+                break;
+        }
     }
 }

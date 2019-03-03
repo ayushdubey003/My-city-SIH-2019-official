@@ -33,6 +33,8 @@ import com.akhgupta.easylocation.EasyLocationRequest;
 import com.akhgupta.easylocation.EasyLocationRequestBuilder;
 import com.google.android.gms.location.LocationRequest;
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -51,11 +53,12 @@ public class MainActivity extends EasyLocationAppCompatActivity {
     private LinearLayout popupButton;
     private LinearLayout root;
     private LinearLayout popup;
+    private TextView logout;
 
 
     private double lati, longi;
     private TextView user;
-    private String address, district = "",location="Noida";
+    private String address, district = "";
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     static AutoCompleteTextView mAutoCompleteTextView;
     SharedPreferences mSharedPreferences;
@@ -68,6 +71,16 @@ public class MainActivity extends EasyLocationAppCompatActivity {
     private String mUsername;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private ImageView mSpeechButton;
+    private LinearLayout layer;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +88,6 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         setContentView(R.layout.activity_main);
         //startActivity(new Intent(this, DetailsActivity.class));finish();
         user=findViewById(R.id.user);
-        connectToFirebase();
         user.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
        // user.setVisibility(View.GONE);
         InputStream inputStream = getResources().openRawResource(R.raw.cities);
@@ -101,8 +113,8 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         loc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // requestSingleLocationFix(easyLocationRequest);
-                mAutoCompleteTextView.setText(getString(R.string.getLocationFromGeoCoder));
+                requestSingleLocationFix(easyLocationRequest);
+               // mAutoCompleteTextView.setText(getString(R.string.getLocationFromGeoCoder));
             }
         });
 
@@ -175,6 +187,11 @@ public class MainActivity extends EasyLocationAppCompatActivity {
 
         common_cities.setAdapter(my_common_citiesadap);
 
+        layer = (LinearLayout) findViewById(R.id.layer);
+        layer.setVisibility(View.GONE);
+
+        logout = (TextView) findViewById(R.id.logout);
+
         popupButton = (LinearLayout) findViewById(R.id.popup_button);
         popup = (LinearLayout) findViewById(R.id.popup);
         root = (LinearLayout) findViewById(R.id.root);
@@ -185,18 +202,40 @@ public class MainActivity extends EasyLocationAppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(popup.getVisibility() == View.GONE){
+                    layer.setVisibility(View.VISIBLE);
                     popup.setVisibility(View.VISIBLE);
+                    popup.bringToFront();
                     root.animate().alpha(0.3f);
                 }
             }
         });
 
-        root.setOnClickListener(new View.OnClickListener() {
+        layer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 popup.animate().setDuration(1000).alpha(1f);
                 popup.setVisibility(View.GONE);
                 root.animate().setDuration(1000).alpha(1f);
+                layer.setVisibility(View.GONE);
+            }
+        });
+
+        popup.setOnClickListener(null);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                AuthUI.getInstance()
+                        .signOut(MainActivity.this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                // user is now signed out
+                                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                                finish();
+                            }
+                        });
+                Toast.makeText(MainActivity.this, "Signed out!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -271,22 +310,6 @@ public class MainActivity extends EasyLocationAppCompatActivity {
         Toast.makeText(this, "Enable Location for app to function properly", Toast.LENGTH_LONG).show();
     }
 
-    public void connectToFirebase(){
-
-    }
-
-    private void UpdateUI(FirebaseUser users) throws IOException {
-        /*
-        TextView userName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userName);
-        TextView email = (TextView) navigationView.getHeaderView(0).findViewById(R.id.email);
-        ImageView imageView = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageView);
-
-        mUsername = user.getDisplayName();
-        userName.setText(mUsername);
-        email.setText(user.getEmail());*/
-        user.setText("Welcome "+users.getDisplayName());
-        //TODO: Add Profile Image in Nav Bar
-    }
 
     private void promptSpeechInput() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);

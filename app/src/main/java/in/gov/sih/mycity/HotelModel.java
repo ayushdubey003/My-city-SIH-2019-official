@@ -1,11 +1,12 @@
 package in.gov.sih.mycity;
 
-public class AttractionModel {
+public class HotelModel {
 
-    String name,address, url;
+    String name,desc,imgurl;
     float avgrat,num;
+    int amnt;
 
-    public AttractionModel()
+    public HotelModel()
     {
 
     }
@@ -18,12 +19,12 @@ public class AttractionModel {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public float getAvgrat() {
@@ -42,11 +43,20 @@ public class AttractionModel {
         this.num = num;
     }
 
-    public String getUrl() {
-        return url;
+
+    public String getImgurl() {
+        return imgurl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
+    }
+
+    public void setAmnt(int amnt) {
+        this.amnt = amnt;
+    }
+
+    public int getAmnt() {
+        return amnt;
     }
 }
