@@ -25,6 +25,8 @@ import java.util.ArrayList;
  */
 public class Attractions_frag extends Fragment {
 
+        public static int scrollpos = 0;
+
      DatabaseReference dref;
      ArrayList<AttractionModel> attractionModels;
      RecyclerView recyclerView;
@@ -57,6 +59,7 @@ public class Attractions_frag extends Fragment {
                  attraction_adapter=new Attraction_Adapter(attractionModels);
                  recyclerView.setAdapter(attraction_adapter);
                   recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                  recyclerView.smoothScrollToPosition(scrollpos);
 
 
             }
