@@ -3,7 +3,9 @@ package in.gov.sih.mycity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 
 import android.content.Context;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -96,6 +99,15 @@ public class College_Adapter extends RecyclerView.Adapter<College_Adapter.ViewHo
 
             }
         });
+
+        viewHolder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("http://maps.google.com/maps?q="+collegemodels.get(i).getName()));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -107,6 +119,7 @@ public class College_Adapter extends RecyclerView.Adapter<College_Adapter.ViewHo
 
         TextView state_dist,name,uni_name,uni_type,rate,rev;
         RatingBar rtbr;
+        ImageView img;
 
 
         public ViewHolder(@NonNull View itemView,Context context,ArrayList<Collegemodel> collegemodels) {
@@ -120,9 +133,7 @@ public class College_Adapter extends RecyclerView.Adapter<College_Adapter.ViewHo
             rtbr=itemView.findViewById(R.id.ret_cl);
             rtbr.setClickable(false);
             rev=itemView.findViewById(R.id.rev_cl);
-
-
-
+            img=itemView.findViewById(R.id.college_map_nav);
 
         }
     }
