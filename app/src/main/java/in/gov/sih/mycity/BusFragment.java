@@ -55,13 +55,13 @@ public class BusFragment extends Fragment {
                 false);
         sourceView = (TextView) returnView.findViewById(R.id.source);
         context = getContext();
-        SharedPreferences sharedPreferences=context.getSharedPreferences("MyPrefs",Context.MODE_PRIVATE);
-        city = sharedPreferences.getString("address"," ");
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        city = sharedPreferences.getString("address", " ");
         sourceView.setText(city);
         show = (TextView) returnView.findViewById(R.id.show);
         myCalendar = Calendar.getInstance();
 
-        edittext= (EditText) returnView.findViewById(R.id.date);
+        edittext = (EditText) returnView.findViewById(R.id.date);
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -99,10 +99,15 @@ public class BusFragment extends Fragment {
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = getUrl();
-                Intent intent = new Intent(getActivity(), WebViewActivity.class);
-                intent.putExtra("url", url);
-                startActivity(intent);
+                String s = edittext.getEditableText().toString();
+                if (s.length() == 0 || s == null) {
+                    Toast.makeText(getContext(),"Date cannot be empty",Toast.LENGTH_LONG).show();
+                } else {
+                    String url = getUrl();
+                    Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                    intent.putExtra("url", url);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -112,18 +117,18 @@ public class BusFragment extends Fragment {
     private void updateLabel() {
         String myFormat = "dd/MM/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        long time1=myCalendar.getTime().getTime();
+        long time1 = myCalendar.getTime().getTime();
         Date date = new Date();
         long time2 = date.getTime();
-        if(time1<time2){
-            Toast.makeText(getContext(),"Enter Valid Date",Toast.LENGTH_LONG).show();
+        if (time1 < time2) {
+            Toast.makeText(getContext(), "Enter Valid Date", Toast.LENGTH_LONG).show();
             return;
         }
         edittext.setText(sdf.format(myCalendar.getTime()));
 
     }
 
-    private String getMonth(int i){
+    private String getMonth(int i) {
         switch (i) {
             case 1:
                 return "Jan";
@@ -153,11 +158,11 @@ public class BusFragment extends Fragment {
         }
     }
 
-    private String getUrl(){
+    private String getUrl() {
         String url = "";
         int choice = spinner.getSelectedItemPosition();
         int targetCityId = 0;
-        switch (choice){
+        switch (choice) {
             case 0:
                 targetCityId = 79613;
                 break;
@@ -175,7 +180,7 @@ public class BusFragment extends Fragment {
         }
 
         String date = edittext.getEditableText().toString();
-        date = date.substring(0, 2) + "-" +  getMonth((Integer.parseInt(date.substring(3, 5))))
+        date = date.substring(0, 2) + "-" + getMonth((Integer.parseInt(date.substring(3, 5))))
                 + "-" + "20" + date.substring(6);
 
         url = "https://www.redbus.in/search?fromCityName=Noida&fromCityId=1429&toCityName=" +
