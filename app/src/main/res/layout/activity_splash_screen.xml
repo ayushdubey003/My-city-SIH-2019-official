@@ -2,18 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    android:id="@+id/activity_splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation_view"
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:lottie_fileName="loading.json"
-        app:lottie_loop="true"
-        app:lottie_autoPlay="true"
-        app:lottie_cacheStrategy="strong"
-        app:lottie_imageAssetsFolder="images" />
+        android:src="@drawable/yamaha" />
 
 </RelativeLayout>
