@@ -58,7 +58,7 @@
                             android:layout_centerInParent="true"
                             android:alpha="0.78"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/icon_about" />
+                            android:src="@drawable/icon_places" />
 
                     </RelativeLayout>
 
@@ -76,7 +76,7 @@
                             android:layout_centerInParent="true"
                             android:alpha="0.3"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/icon_places" />
+                            android:src="@drawable/icon_train" />
 
                     </RelativeLayout>
 
@@ -94,7 +94,7 @@
                             android:layout_centerInParent="true"
                             android:alpha="0.3"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/icon_education" />
+                            android:src="@drawable/icon_bus" />
 
                     </RelativeLayout>
 
@@ -148,7 +148,43 @@
                             android:layout_centerInParent="true"
                             android:alpha="0.3"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/icon_train" />
+                            android:src="@drawable/icon_person_female" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp">
+
+                        <ImageView
+                                android:id="@+id/tab7"
+                                android:layout_width="96px"
+                                android:layout_height="96px"
+                                android:layout_centerInParent="true"
+                                android:alpha="0.3"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/icon_education" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp">
+
+                        <ImageView
+                                android:id="@+id/tab8"
+                                android:layout_width="96px"
+                                android:layout_height="96px"
+                                android:layout_centerInParent="true"
+                                android:alpha="0.3"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/icon_home" />
 
                     </RelativeLayout>
 
