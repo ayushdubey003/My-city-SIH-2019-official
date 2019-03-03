@@ -34,6 +34,7 @@ public class Attraction_Adapter extends RecyclerView.Adapter<Attraction_Adapter.
 
     ArrayList<AttractionModel> attractionModels;
     Context context;
+    ViewGroup group;
 
 
     public Attraction_Adapter(ArrayList<AttractionModel> attractionModels)
@@ -46,6 +47,7 @@ public class Attraction_Adapter extends RecyclerView.Adapter<Attraction_Adapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context=parent.getContext();
+        group = parent;
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.atttraction_item,parent,false);
         ViewHolder viewHolder=new ViewHolder(view,parent.getContext(),attractionModels);
         return viewHolder;
@@ -79,7 +81,7 @@ public class Attraction_Adapter extends RecyclerView.Adapter<Attraction_Adapter.
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-
+                    Attractions_frag.scrollpos = position;
 
                         if(rating==0.0f) {
                             dref.child(String.valueOf(position)).child("avgrat").setValue(((attractionModels.get(position).getAvgrat() * attractionModels.get(position).getNum() - rating + ratingBar.getRating()) / (attractionModels.get(position).getNum()+1)));

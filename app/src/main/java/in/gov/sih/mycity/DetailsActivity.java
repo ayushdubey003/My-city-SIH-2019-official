@@ -106,9 +106,11 @@ public class DetailsActivity extends AppCompatActivity {
 
         if (position >= number_of_tabs - 2)
             horizontalScrollView.scrollBy(horizontalScrollView.getWidth() / number_of_tabs, 0);
+                if(position >= number_of_tabs  - 2)
+                        horizontalScrollView.scrollBy(horizontalScrollView.getWidth() / number_of_tabs, 0);
 
-        if (position <= 1)
-            horizontalScrollView.scrollBy(-horizontalScrollView.getWidth() / number_of_tabs, 0);
+                if(position <= 1)
+                        horizontalScrollView.scrollBy(-horizontalScrollView.getWidth() / number_of_tabs, 0);
 
         String fragmentTitle;
         switch (position) {
