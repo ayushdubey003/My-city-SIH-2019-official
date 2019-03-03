@@ -42,10 +42,11 @@
         <activity
             android:name=".IntroductionActivity"
             android:label="@string/title_activity_introduction" />
-        <activity android:name=".MainActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".weather_activity"></activity>
-        <activity android:name=".WebViewActivity"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".weather_activity" />
+        <activity android:name=".WebViewActivity" />
         <activity android:name=".EmailNotVerified" />
     </application>
 
