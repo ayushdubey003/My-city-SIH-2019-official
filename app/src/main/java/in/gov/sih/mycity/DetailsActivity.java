@@ -25,7 +25,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private ImageView tabs[];
-    private static final int number_of_tabs = 6;
+    private static final int number_of_tabs = 7;
     private HorizontalScrollView horizontalScrollView;
     private String city;
     LottieAnimationView animationView;
@@ -62,7 +62,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         tabs = new ImageView[]{((ImageView) findViewById(R.id.tab1)), ((ImageView) findViewById(R.id.tab2)),
                 ((ImageView) findViewById(R.id.tab3)), ((ImageView) findViewById(R.id.tab4)),
-                ((ImageView) findViewById(R.id.tab5)), ((ImageView) findViewById(R.id.tab6))};
+                ((ImageView) findViewById(R.id.tab5)), ((ImageView) findViewById(R.id.tab6)),
+                ((ImageView) findViewById(R.id.tab6))};
 
         for (int i = 0; i < number_of_tabs; i++) {
             final int position = i;
@@ -105,9 +106,11 @@ public class DetailsActivity extends AppCompatActivity {
 
         if (position >= number_of_tabs - 2)
             horizontalScrollView.scrollBy(horizontalScrollView.getWidth() / number_of_tabs, 0);
+                if(position >= number_of_tabs  - 2)
+                        horizontalScrollView.scrollBy(horizontalScrollView.getWidth() / number_of_tabs, 0);
 
-        if (position <= 1)
-            horizontalScrollView.scrollBy(-horizontalScrollView.getWidth() / number_of_tabs, 0);
+                if(position <= 1)
+                        horizontalScrollView.scrollBy(-horizontalScrollView.getWidth() / number_of_tabs, 0);
 
         String fragmentTitle;
         switch (position) {
@@ -128,6 +131,9 @@ public class DetailsActivity extends AppCompatActivity {
                 break;
             case 5:
                 fragmentTitle = "Trains from " + city;
+                break;
+            case 6:
+                fragmentTitle = "Notable People in " + city;
                 break;
             default:
                 fragmentTitle = "";
@@ -159,6 +165,10 @@ public class DetailsActivity extends AppCompatActivity {
                     return new HospitalFragment();
                 case 5:
                     return new HotelFragment();
+                case 6:
+                    return new PeopleFragment();
+                case 7:
+                     return new School_fragment();
                 default:
                     return null;
             }

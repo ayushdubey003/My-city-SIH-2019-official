@@ -20,10 +20,12 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class BusFragment extends Fragment {
@@ -56,7 +58,7 @@ public class BusFragment extends Fragment {
         SharedPreferences sharedPreferences=context.getSharedPreferences("MyPrefs",Context.MODE_PRIVATE);
         city = sharedPreferences.getString("address"," ");
         sourceView.setText(city);
-
+        show = (TextView) returnView.findViewById(R.id.show);
         myCalendar = Calendar.getInstance();
 
         edittext= (EditText) returnView.findViewById(R.id.date);
@@ -93,7 +95,6 @@ public class BusFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        show = (TextView) returnView.findViewById(R.id.show);
 
         show.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,8 +112,15 @@ public class BusFragment extends Fragment {
     private void updateLabel() {
         String myFormat = "dd/MM/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
+        long time1=myCalendar.getTime().getTime();
+        Date date = new Date();
+        long time2 = date.getTime();
+        if(time1<time2){
+            Toast.makeText(getContext(),"Enter Valid Date",Toast.LENGTH_LONG).show();
+            return;
+        }
         edittext.setText(sdf.format(myCalendar.getTime()));
+
     }
 
     private String getMonth(int i){

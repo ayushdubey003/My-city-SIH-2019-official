@@ -1,9 +1,9 @@
 package in.gov.sih.mycity;
 
-
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,20 +19,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+public class PeopleFragment extends Fragment {
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class Attractions_frag extends Fragment {
+    DatabaseReference dref;
+    ArrayList<PeopleModel> peopleModels;
+    RecyclerView recyclerView;
+    PeopleAdapter peopleAdapter;
 
-        public static int scrollpos = 0;
-
-     DatabaseReference dref;
-     ArrayList<AttractionModel> attractionModels;
-     RecyclerView recyclerView;
-     Attraction_Adapter attraction_adapter;
-
-    public Attractions_frag() {
+    public PeopleFragment() {
         // Required empty public constructor
     }
 
@@ -41,25 +35,25 @@ public class Attractions_frag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_attractions, container, false);
+        View view= inflater.inflate(R.layout.fragment_people, container, false);
         recyclerView=view.findViewById(R.id.recycler);
 
-        attractionModels=new ArrayList<>();
-        dref= FirebaseDatabase.getInstance().getReference("mainattraction");
+        peopleModels=new ArrayList<>();
+        dref= FirebaseDatabase.getInstance().getReference("people");
         dref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                attractionModels.clear();
+                peopleModels.clear();
                 for(DataSnapshot ds: dataSnapshot.getChildren())
                 {
-                    AttractionModel att=ds.getValue(AttractionModel.class);
-                    attractionModels.add(att);
-                }
+                    PeopleModel att=ds.getValue(PeopleModel.class);
+                    peopleModels.add(att);
 
-                 attraction_adapter=new Attraction_Adapter(attractionModels);
-                 recyclerView.setAdapter(attraction_adapter);
-                  recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                  recyclerView.smoothScrollToPosition(scrollpos);
+                }
+                Log.e("tag",""+peopleModels.size());
+                peopleAdapter=new PeopleAdapter(peopleModels);
+                recyclerView.setAdapter(peopleAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
             }
@@ -72,5 +66,4 @@ public class Attractions_frag extends Fragment {
 
         return view;
     }
-
 }
