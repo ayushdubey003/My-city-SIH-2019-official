@@ -25,7 +25,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private ImageView tabs[];
-    private static final int number_of_tabs = 7;
+    private static final int number_of_tabs = 8;
     private HorizontalScrollView horizontalScrollView;
     private String city;
     LottieAnimationView animationView;
@@ -63,7 +63,7 @@ public class DetailsActivity extends AppCompatActivity {
         tabs = new ImageView[]{((ImageView) findViewById(R.id.tab1)), ((ImageView) findViewById(R.id.tab2)),
                 ((ImageView) findViewById(R.id.tab3)), ((ImageView) findViewById(R.id.tab4)),
                 ((ImageView) findViewById(R.id.tab5)), ((ImageView) findViewById(R.id.tab6)),
-                ((ImageView) findViewById(R.id.tab6))};
+                ((ImageView) findViewById(R.id.tab6)),((ImageView) findViewById(R.id.tab6))};
 
         for (int i = 0; i < number_of_tabs; i++) {
             final int position = i;

@@ -69,18 +69,17 @@ public class weather_activity extends AppCompatActivity {
                             JSONObject root=new JSONObject(response);
                             JSONArray weather_obj=root.getJSONArray("weather");
 
-                            String main_obj="";
                             String desc_obj="";
                             for(int i=0;i<weather_obj.length();i++)
                             {
                                 JSONObject currentarticle=weather_obj.getJSONObject(i);
-                                desc_obj=currentarticle.getString("description");
+                                desc_obj=currentarticle.getString("main");
                             }
 
 
                             JSONObject main2=root.getJSONObject("main");
 
-                            Double temp_obj=main2.getDouble("people_item");
+                            Double temp_obj=main2.getDouble("temp");
                             Double pres_obj=main2.getDouble("pressure");
                             Double humid_obj=main2.getDouble("humidity");
                             Double tempmin_obj=main2.getDouble("temp_min");
@@ -92,14 +91,15 @@ public class weather_activity extends AppCompatActivity {
                             Double dir_obj=wind_obj.getDouble("deg");
 
 
-                            temp_min.setText(tempmin_obj.toString());
-                            temp_max.setText(tempmax_obj.toString());
+                            temp_min.setText(String.valueOf(tempmin_obj));
+                            temp_max.setText(String.valueOf(tempmax_obj));
                             desc.setText(desc_obj);
-                            temp.setText(temp_obj.toString());
-                            press.setText(pres_obj.toString());
-                            humidity.setText(humid_obj.toString());
-                            wind_speed.setText(speed_obj.toString());
-                            wind_dir.setText(dir_obj.toString());
+                            temp.setText(String.valueOf(temp_obj));
+                            press.setText(String.valueOf(pres_obj));
+                            humidity.setText(String.valueOf(humid_obj));
+                            wind_speed.setText(String.valueOf(speed_obj));
+                            wind_dir.setText(String.valueOf(dir_obj));
+
 
 
                         } catch (JSONException e) {

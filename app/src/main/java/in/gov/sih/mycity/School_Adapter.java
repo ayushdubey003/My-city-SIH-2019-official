@@ -79,7 +79,7 @@ public class School_Adapter extends RecyclerView.Adapter<School_Adapter.ViewHold
                            }
 
                            if (rating != 0.0f) {
-                               dref.child(String.valueOf(i)).child("avgrat").setValue(((schoolmodels.get(i).getAvgrat() * schoolmodels.get(i).getNum() - rating + ratingBar.getRating()) / (schoolmodels.get(i).getNum())));
+                               dref.child(String.valueOf(i)).child("avgrat").setValue(((schoolmodels.get(i).getAvgrat() * schoolmodels.get(i).getNum() - rating + ratingBar.getRating()) / (schoolmodels.get(i).getNum()+1)));
                            }
                            editor.putFloat("rrt", ratingBar.getRating());
                            editor.commit();
