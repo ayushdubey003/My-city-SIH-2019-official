@@ -40,8 +40,12 @@ Mobile app to provide all generic public information of selected city of India.I
 ### Animation:
 * Lottie
 
+### What's in it for the user ?:
+* The user can earn credits and karma points everytime his answers are upvoted, thus making the app responsive and user desirable.
+* The app is completely user friendly and the user can even add utilities to the app as per his requirement.
+* The user can see other users' reviews and mark them as good (upvote) or bad (downvote).
+* Place Search is even voice enabled !
 
 ### PS : 
-* The app is completely user friendly and the user can even add utilities to the app as per his requirement.
-* Place Search is even voice enabled !
+* Add feature for review and ratings of main attractions, hotels, hospitals and educational institutes.
 * Due to some limitations in the access to the twitter api, at present we cannot provide user with the trending places.
