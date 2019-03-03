@@ -48,7 +48,8 @@
         <activity android:name=".weather_activity" />
         <activity android:name=".WebViewActivity" />
         <activity android:name=".EmailNotVerified" />
-        <activity android:name=".HotelFragment"></activity>
+        <activity android:name=".HotelFragment" />
+        <activity android:name=".railway_web_activity"></activity>
     </application>
 
 </manifest>

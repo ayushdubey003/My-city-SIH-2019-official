@@ -1,5 +1,6 @@
 package in.gov.sih.mycity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -111,6 +112,20 @@ public class TrainScheduleFragment extends Fragment {
         });
         trainAdapter = new TrainAdapter(getContext(), 0, new ArrayList<TrainModel>());
         mList.setAdapter(trainAdapter);
+        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TrainModel curr_train=trainAdapter.getItem(i);
+                String train_day=curr_train.getmArrival();
+                train_day=train_day.replace("(",":");
+                String[] parts=train_day.split(":");
+                Log.e("VIVZ", ""+parts.length );
+                Intent intent=new Intent(getActivity(),railway_web_activity.class);
+                intent.putExtra("train_no",curr_train.getmTrainNumber());
+                intent.putExtra("train_day",parts[1].substring(0,parts[1].length()-1));
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

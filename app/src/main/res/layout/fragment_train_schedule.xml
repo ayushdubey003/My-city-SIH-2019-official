@@ -85,7 +85,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:dividerHeight="0dp"></ListView>
+            android:dividerHeight="0dp">
+
+        </ListView>
 
         <ProgressBar
             android:id="@+id/progressBarTrain"
