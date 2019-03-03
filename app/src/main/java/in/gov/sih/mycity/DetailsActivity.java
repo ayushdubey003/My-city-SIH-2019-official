@@ -63,7 +63,8 @@ public class DetailsActivity extends AppCompatActivity {
         tabs = new ImageView[]{((ImageView) findViewById(R.id.tab1)), ((ImageView) findViewById(R.id.tab2)),
                 ((ImageView) findViewById(R.id.tab3)), ((ImageView) findViewById(R.id.tab4)),
                 ((ImageView) findViewById(R.id.tab5)), ((ImageView) findViewById(R.id.tab6)),
-                ((ImageView) findViewById(R.id.tab6)),((ImageView) findViewById(R.id.tab6))};
+                ((ImageView) findViewById(R.id.tab6)),((ImageView) findViewById(R.id.tab6)),
+                ((ImageView) findViewById(R.id.tab7)), ((ImageView) findViewById(R.id.tab8))};
 
         for (int i = 0; i < number_of_tabs; i++) {
             final int position = i;
@@ -104,37 +105,41 @@ public class DetailsActivity extends AppCompatActivity {
         tabs[position].setAlpha(0.78f);
         viewPager.setCurrentItem(position, true);
 
-        if (position >= number_of_tabs - 2)
+        /*if (position >= number_of_tabs - 2)
             horizontalScrollView.scrollBy(horizontalScrollView.getWidth() / number_of_tabs, 0);
                 if(position >= number_of_tabs  - 2)
                         horizontalScrollView.scrollBy(horizontalScrollView.getWidth() / number_of_tabs, 0);
 
                 if(position <= 1)
                         horizontalScrollView.scrollBy(-horizontalScrollView.getWidth() / number_of_tabs, 0);
-
+*/
         String fragmentTitle;
         switch (position) {
             case 0:
-                fragmentTitle = "City Details of " + city;
-                break;
-            case 1:
                 fragmentTitle = "Places of " + city;
                 break;
-            case 2:
+            case 1:
                 fragmentTitle = "Trains From " + city;
                 break;
-            case 3:
+            case 2:
                 fragmentTitle = "Buses From " + city;
+                break;
+            case 3:
+                fragmentTitle = "Hospitals in " + city;
                 break;
             case 4:
                 fragmentTitle = "Hotels in " + city;
                 break;
             case 5:
-                fragmentTitle = "Trains from " + city;
-                break;
-            case 6:
                 fragmentTitle = "Notable People in " + city;
                 break;
+            case 6:
+                fragmentTitle = "Education in " + city;
+                break;
+            case 7:
+                fragmentTitle = "City Details of " + city;
+                break;
+
             default:
                 fragmentTitle = "";
         }
@@ -154,21 +159,21 @@ public class DetailsActivity extends AppCompatActivity {
         public Fragment getItem(int i) {
             switch (i) {
                 case 0:
-                    return new Information().newInstance();
-                case 1:
                     return new Attractions_frag();
-                case 2:
+                case 1:
                     return new TrainScheduleFragment().newInstance();
-                case 3:
+                case 2:
                     return new BusFragment().newInstance();
-                case 4:
+                case 3:
                     return new HospitalFragment();
-                case 5:
+                case 4:
                     return new HotelFragment();
-                case 6:
+                case 5:
                     return new PeopleFragment();
-                case 7:
+                case 6:
                      return new School_fragment();
+                case 7:
+                    return new Information().newInstance();
                 default:
                     return null;
             }
