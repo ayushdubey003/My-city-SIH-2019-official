@@ -84,7 +84,7 @@
                                         <ImageView
                                             android:layout_width="96px"
                                             android:layout_height="96px"
-                                            android:src="@drawable/icon_education"
+                                            android:src="@drawable/icon_train"
                                             android:scaleType="centerCrop"
                                             android:layout_centerInParent="true"
                                             android:alpha="0.3"
@@ -102,7 +102,7 @@
                                         <ImageView
                                             android:layout_width="96px"
                                             android:layout_height="96px"
-                                            android:src="@drawable/icon_hospital"
+                                            android:src="@drawable/icon_bus"
                                             android:scaleType="centerCrop"
                                             android:layout_centerInParent="true"
                                             android:alpha="0.3"

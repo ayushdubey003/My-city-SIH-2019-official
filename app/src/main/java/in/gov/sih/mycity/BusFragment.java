@@ -85,7 +85,7 @@ public class BusFragment extends Fragment {
             }
         });
 
-        String[] cities = new String[]{"Aligargh", "Agra", "Jaipur", "Kanpur", "Lucknow"};
+        String[] cities = new String[]{"Aligarh", "Agra", "Jaipur", "Kanpur", "Lucknow"};
 
         spinner = (Spinner) returnView.findViewById(R.id.destination);
 

@@ -96,7 +96,7 @@ public class DetailsActivity extends AppCompatActivity {
                                 fragmentTitle = "City Details of " + city;
                                 break;
                         case 1:
-                                fragmentTitle = "Places of " + city;
+                                fragmentTitle = "Places in " + city;
                                 break;
                         case 2:
                                 fragmentTitle = "Trains From " + city;
