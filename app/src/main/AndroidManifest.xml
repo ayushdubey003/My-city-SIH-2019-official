@@ -46,6 +46,7 @@
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".weather_activity"></activity>
         <activity android:name=".EmailNotVerified" />
+        <activity android:name=".WebViewActivity"/>
     </application>
 
 </manifest>
