@@ -3,7 +3,9 @@ package in.gov.sih.mycity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -49,14 +52,40 @@ public class School_Adapter extends RecyclerView.Adapter<School_Adapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
            viewHolder.name.setText(schoolmodels.get(i).getName());
            viewHolder.email.setText(schoolmodels.get(i).getEmail());
+           viewHolder.email.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                           "mailto",schoolmodels.get(i).getEmail(), null));
+                   context.startActivity(intent);
+               }
+           });
            viewHolder.board.setText(schoolmodels.get(i).getBoard());
            viewHolder.website.setText(schoolmodels.get(i).getWebsite());
+           if(schoolmodels.get(i).getWebsite().equals("-NA-") == false){
+               viewHolder.website.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       Intent intent =new Intent(Intent.ACTION_VIEW);
+                       intent.setData(Uri.parse(schoolmodels.get(i).getWebsite()));
+                       context.startActivity(intent);
+                   }
+               });
+           }
            viewHolder.principal.setText(schoolmodels.get(i).getPrincipal());
            viewHolder.distate.setText(schoolmodels.get(i).getDistate());
            viewHolder.phone.setText(""+schoolmodels.get(i).getPhone());
+           viewHolder.phone.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent intent =new Intent(Intent.ACTION_DIAL);
+                   intent.setData(Uri.parse("tel:"+schoolmodels.get(i).getPhone()));
+                   context.startActivity(intent);
+               }
+           });
            viewHolder.rtbr.setRating(schoolmodels.get(i).getAvgrat());
            int revv=(int)schoolmodels.get(i).getNum();
            viewHolder.rev.setText(String.valueOf(revv)+" reviews");
@@ -151,6 +180,15 @@ public class School_Adapter extends RecyclerView.Adapter<School_Adapter.ViewHold
 
                }
            });
+
+           viewHolder.loc.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent intent=new Intent(Intent.ACTION_VIEW);
+                   intent.setData(Uri.parse("http://maps.google.com/maps?q="+schoolmodels.get(i).getName()+schoolmodels.get(i).getAddress()));
+                   context.startActivity(intent);
+               }
+           });
     }
 
     @Override
@@ -162,6 +200,7 @@ public class School_Adapter extends RecyclerView.Adapter<School_Adapter.ViewHold
 
         TextView address,name,board,email,phone,website,principal,distate,rate,rev;
         RatingBar rtbr;
+        ImageView loc;
 
 
 
@@ -180,6 +219,7 @@ public class School_Adapter extends RecyclerView.Adapter<School_Adapter.ViewHold
            rev=itemView.findViewById(R.id.rev);
            principal=itemView.findViewById(R.id.school_principal_name);
            distate=itemView.findViewById(R.id.school_state_dist);
+           loc=itemView.findViewById(R.id.school_map_nav);
 
 
 
