@@ -80,7 +80,7 @@ public class weather_activity extends AppCompatActivity {
 
                             JSONObject main2=root.getJSONObject("main");
 
-                            Double temp_obj=main2.getDouble("temp");
+                            Double temp_obj=main2.getDouble("people_item");
                             Double pres_obj=main2.getDouble("pressure");
                             Double humid_obj=main2.getDouble("humidity");
                             Double tempmin_obj=main2.getDouble("temp_min");

@@ -55,7 +55,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         int revv=(int)hotelModels.get(position).getNum();
         holder.rev.setText(revv+" reviews");
         holder.rat.setRating(hotelModels.get(position).getAvgrat());
-     /*   holder.ret.setOnClickListener(new View.OnClickListener() {
+        holder.ret.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -97,7 +97,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
                 Dialog dialog=builder.create();
                 dialog.show();
             }
-        });*/
+        });
 
 
     }
@@ -108,8 +108,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView name,rev,desc,price;
-        Button ret;
+        TextView name,rev,desc,price,ret;
         RatingBar rat;
         ImageView img;
         ArrayList<HotelModel> hotelModels;
@@ -123,7 +122,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
             rat=itemView.findViewById(R.id.rating_bar);
             img=itemView.findViewById(R.id.image);
             price=itemView.findViewById(R.id.hotel_price);
-            //ret=itemView.findViewById(R.id.rate_us);
+            ret=itemView.findViewById(R.id.rate_us);
             name.setOnClickListener(this);
             desc.setOnClickListener(this);
             price.setOnClickListener(this);
