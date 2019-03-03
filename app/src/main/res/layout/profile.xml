@@ -1,0 +1,136 @@
+<LinearLayout android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:padding="18dp"
+        android:background="@drawable/back">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.63"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="16dp"
+                        android:layout_gravity="center_vertical">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20sp"
+                                android:textColor="#FFFFFF"
+                                android:textStyle="bold"
+                                android:fontFamily="serif"
+                                android:id="@+id/email_or_username"
+                                android:text="purusharthverma756"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:textColor="#FFFFFF"
+                                android:fontFamily="serif"
+                                android:textStyle="bold"
+                                android:id="@+id/name"
+                                android:text="Purusharth Verma"
+                                android:layout_marginTop="2dp"/>
+
+                        <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:id="@+id/edit_profile"
+                                android:layout_marginTop="12dp"
+                                android:src="@drawable/share"
+                                android:layout_marginBottom="12dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.37"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical">
+
+                        <android.support.v7.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:cardCornerRadius="65dp">
+
+                                <ImageView
+                                        android:layout_width="120dp"
+                                        android:layout_height="120dp"
+                                        android:src="@drawable/hyderabad"
+                                        android:scaleType="centerCrop"/>
+
+                        </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="#EEEEEE"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:fontFamily="serif"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_marginTop="26dp"
+                        android:id="@+id/upvotes_label"
+                        android:text="Upvotes"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:fontFamily="serif"
+                        android:text="33 upvotes"/>
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#FFFFFF"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Karma level"
+                        android:id="@+id/karma_label"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:fontFamily="serif"
+                        android:textSize="12sp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:text="29"
+                        android:id="@+id/karma"
+                        android:layout_marginTop="4dp"/>
+
+        </LinearLayout>
+
+</LinearLayout>
