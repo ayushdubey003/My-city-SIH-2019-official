@@ -106,9 +106,11 @@ public class DetailsActivity extends AppCompatActivity {
 
         if (position >= number_of_tabs - 2)
             horizontalScrollView.scrollBy(horizontalScrollView.getWidth() / number_of_tabs, 0);
+                if(position >= number_of_tabs  - 2)
+                        horizontalScrollView.scrollBy(horizontalScrollView.getWidth() / number_of_tabs, 0);
 
-        if (position <= 1)
-            horizontalScrollView.scrollBy(-horizontalScrollView.getWidth() / number_of_tabs, 0);
+                if(position <= 1)
+                        horizontalScrollView.scrollBy(-horizontalScrollView.getWidth() / number_of_tabs, 0);
 
         String fragmentTitle;
         switch (position) {
@@ -165,6 +167,8 @@ public class DetailsActivity extends AppCompatActivity {
                     return new HotelFragment();
                 case 6:
                     return new PeopleFragment();
+                case 7:
+                     return new School_fragment();
                 default:
                     return null;
             }

@@ -56,7 +56,7 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
         holder.ret.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                HospitalFragment.scrollPos = position;
                 AlertDialog.Builder builder=new AlertDialog.Builder(context);
                 final RatingBar ratingBar=new RatingBar(context);
                 ratingBar.setPadding(100, 100, 100, 0);

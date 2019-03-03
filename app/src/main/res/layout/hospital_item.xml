@@ -1,40 +1,73 @@
-<LinearLayout android:layout_height="match_parent"
+<LinearLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:padding="16dp">
+        android:padding="2dp">
 
-        <TextView
-                android:layout_width="wrap_content"
+        <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/name"
-                android:text="name"/>
+                android:elevation="12dp"
+                android:layout_margin="12dp">
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/address"
-                android:text="address"
-                android:layout_marginTop="16dp"/>
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="18dp">
 
-        <RatingBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="?attr/ratingBarStyleSmall"
-                android:id="@+id/rating_bar"
-                android:layout_marginTop="16dp"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/name"
+                                android:text="name"
+                                android:textSize="22sp"
+                                android:textStyle="bold"/>
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/number_of_reviews"
-                android:text="(238 reviews) "
-                android:layout_marginTop="16dp"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/address"
+                                android:text="address"
+                                android:fontFamily="serif"
+                                android:layout_marginTop="8dp"
+                                android:textSize="18sp"/>
 
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/rate_us"
-                android:text="Rate Us"/>
+                        <RatingBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="?attr/ratingBarStyleSmall"
+                                android:id="@+id/rating_bar"
+                                android:layout_marginTop="20dp"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/number_of_reviews"
+                                android:text="(238 reviews) "
+                                android:layout_marginTop="4dp"/>
+
+                        <android.support.v7.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="18dp"
+                                app:cardCornerRadius="17dp">
+
+                                <Button
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="36dp"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="8dp"
+                                        android:id="@+id/rate_us"
+                                        android:text="Rate Us"
+                                        android:textColor="#FFFFFF"
+                                        android:background="@color/colorAccent"/>
+
+                        </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
+        </android.support.v7.widget.CardView>
 
 </LinearLayout>

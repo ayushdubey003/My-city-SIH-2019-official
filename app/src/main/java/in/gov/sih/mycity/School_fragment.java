@@ -1,6 +1,7 @@
 package in.gov.sih.mycity;
 
-
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -20,19 +21,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class Attractions_frag extends Fragment {
+public class School_fragment extends Fragment {
 
-        public static int scrollpos = 0;
+    RecyclerView recyclerView;
+    School_Adapter school_adapter;
+    ArrayList<schoolmodel> schoolmodels;
+    DatabaseReference dref;
 
-     DatabaseReference dref;
-     ArrayList<AttractionModel> attractionModels;
-     RecyclerView recyclerView;
-     Attraction_Adapter attraction_adapter;
+    public School_fragment() {
 
-    public Attractions_frag() {
         // Required empty public constructor
     }
 
@@ -40,26 +37,26 @@ public class Attractions_frag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_attractions, container, false);
+
+        View view=inflater.inflate(R.layout.fragment_school, container,false);
         recyclerView=view.findViewById(R.id.recycler);
 
-        attractionModels=new ArrayList<>();
-        dref= FirebaseDatabase.getInstance().getReference("mainattraction");
+        schoolmodels=new ArrayList<>();
+
+        dref= FirebaseDatabase.getInstance().getReference("schools");
         dref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                attractionModels.clear();
+                schoolmodels.clear();
                 for(DataSnapshot ds: dataSnapshot.getChildren())
                 {
-                    AttractionModel att=ds.getValue(AttractionModel.class);
-                    attractionModels.add(att);
+                    schoolmodel att=ds.getValue(schoolmodel.class);
+                    schoolmodels.add(att);
                 }
-
-                 attraction_adapter=new Attraction_Adapter(attractionModels);
-                 recyclerView.setAdapter(attraction_adapter);
-                  recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                  recyclerView.smoothScrollToPosition(scrollpos);
+                Log.i("onDataChange: ",""+schoolmodels.size());
+                school_adapter=new School_Adapter(schoolmodels);
+                recyclerView.setAdapter(school_adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
             }
@@ -72,5 +69,6 @@ public class Attractions_frag extends Fragment {
 
         return view;
     }
+
 
 }
