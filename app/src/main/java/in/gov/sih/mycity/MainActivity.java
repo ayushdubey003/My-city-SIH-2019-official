@@ -58,7 +58,7 @@ public class MainActivity extends EasyLocationAppCompatActivity {
 
     private double lati, longi;
     private TextView user;
-    private String address, district = "",location="Noida";
+    private String address, district = "";
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     static AutoCompleteTextView mAutoCompleteTextView;
     SharedPreferences mSharedPreferences;
