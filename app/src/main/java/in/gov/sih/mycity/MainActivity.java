@@ -55,6 +55,8 @@ public class MainActivity extends EasyLocationAppCompatActivity {
     private LinearLayout popup;
     private TextView logout;
 
+    private LinearLayout home, profile;
+
 
     private double lati, longi;
     private TextView user;
@@ -236,6 +238,25 @@ public class MainActivity extends EasyLocationAppCompatActivity {
                             }
                         });
                 Toast.makeText(MainActivity.this, "Signed out!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        home = (LinearLayout) findViewById(R.id.home);
+        profile = (LinearLayout) findViewById(R.id.profile);
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                home.setAlpha(1f);
+                profile.setAlpha(0.3f);
+            }
+        });
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                home.setAlpha(0.3f);
+                profile.setAlpha(1f);
             }
         });
 
